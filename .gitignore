@@ -1,0 +1,9 @@
+# Fotos y video originales subidos por el usuario (ya copiados a assets/).
+# No se publican para no duplicar ~34 MB; se conservan solo en local.
+Imagenes/
+
+# Basura del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log

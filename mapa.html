@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geoportal — Las Cabañas el Cadillar</title>
+<meta name="description" content="Geoportal interactivo del Cadillar: ubicación, rutas de trekking y de bicicleta, cascadas, miradores y puntos de interés en los cerros de Tarija.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Las Cabañas el Cadillar">
+<meta property="og:locale" content="es_BO">
+<meta property="og:title" content="El mapa del entorno — Las Cabañas el Cadillar">
+<meta property="og:description" content="Ubicación, rutas de trekking y bici, cascadas y miradores en los cerros de Tarija.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&h=630&q=80">
+<meta property="og:url" content="https://www.cabanasdelcadillar.bo/mapa.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&h=630&q=80">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23171612'/><text x='50' y='72' font-size='60' text-anchor='middle' fill='%23f1efe9' font-family='Georgia'>C</text></svg>">
+<style>
+  /* ---- Geoportal: panel vertical + mapa ---- */
+  .geo { display: grid; grid-template-columns: 384px 1fr; height: calc(100vh - var(--nav-h)); margin-top: var(--nav-h); }
+  .geo-panel { background: var(--paper); border-right: 1px solid var(--line); padding: 2.2rem 1.9rem 2.6rem; overflow-y: auto; }
+  .geo-panel__head h1 { font-size: 1.9rem; line-height: 1.05; letter-spacing: -0.03em; }
+  .geo-panel__intro { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-top: 0.7rem; }
+
+  .geo-block { margin-top: 1.6rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .geo-block > h2 { font-family: var(--body); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 1rem; }
+
+  /* Segmentado: vista del mapa */
+  .seg { display: flex; border: 1px solid var(--line-2); border-radius: var(--radius); padding: 3px; gap: 3px; }
+  .seg button { flex: 1; padding: 0.55rem 0.3rem; border-radius: 1px; font-family: var(--body); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; color: var(--muted); transition: var(--transition); }
+  .seg button.is-active { background: var(--ink); color: var(--paper); }
+
+  /* Interruptores de capas */
+  .tog { display: flex; align-items: center; gap: 0.8rem; width: 100%; padding: 0.8rem 0; border-bottom: 1px solid var(--line); text-align: left; color: var(--ink); }
+  .tog:last-child { border-bottom: 0; }
+  .tog__mark { width: 22px; height: 3px; border-radius: 2px; background: var(--c); flex: none; }
+  .tog__mark--dot { width: 12px; height: 12px; border-radius: 50%; }
+  .tog__label { font-size: 0.9rem; }
+  .tog__sw { margin-left: auto; width: 38px; height: 21px; border-radius: 100px; background: var(--line-2); position: relative; flex: none; transition: var(--transition); }
+  .tog__sw::after { content: ''; position: absolute; top: 2.5px; left: 2.5px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: var(--transition); box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
+  .tog.is-active .tog__sw { background: var(--ink); }
+  .tog.is-active .tog__sw::after { transform: translateX(17px); }
+
+  /* Rutas sugeridas */
+  .route { display: block; width: 100%; text-align: left; padding: 0.9rem 0; border-bottom: 1px solid var(--line); transition: var(--transition); }
+  .route:last-child { border-bottom: 0; }
+  .route:hover { padding-left: 0.35rem; }
+  .route__top { display: flex; align-items: center; gap: 0.6rem; }
+  .route__chip { font-size: 0.54rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; padding: 0.25rem 0.55rem; border-radius: 100px; }
+  .chip--trek { background: rgba(46,110,74,0.14); color: #2e6e4a; }
+  .chip--bici { background: rgba(178,80,52,0.14); color: #b25034; }
+  .route__arrow { margin-left: auto; color: var(--ink); width: 15px; opacity: 0; transition: var(--transition); }
+  .route:hover .route__arrow { opacity: 1; }
+  .route h3 { font-family: var(--display); font-size: 1.05rem; font-weight: 500; margin: 0.4rem 0 0.15rem; letter-spacing: -0.01em; }
+  .route__m { font-size: 0.76rem; color: var(--muted); }
+  .route__m b { color: var(--ink); font-weight: 600; }
+
+  /* Puntos de interés (lista) */
+  .poi-item { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; width: 100%; text-align: left; padding: 0.65rem 0; border-bottom: 1px solid var(--line); transition: var(--transition); }
+  .poi-item:last-child { border-bottom: 0; }
+  .poi-item:hover { padding-left: 0.3rem; }
+  .poi-item__n { font-size: 0.88rem; color: var(--ink); }
+  .poi-item__d { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; }
+
+  .geo-note { font-size: 0.76rem; color: var(--muted); line-height: 1.6; margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+
+  /* Mapa */
+  .geo-map { position: relative; }
+  #map { position: absolute; inset: 0; background: #e6e4dd; }
+  .leaflet-container { font-family: var(--body); background: #e6e4dd; }
+  .leaflet-bar a { color: var(--ink); border-radius: 0 !important; }
+  .leaflet-bar a:hover { background: var(--paper); }
+  .leaflet-control-attribution { font-size: 10px; }
+  .leaflet-popup-content-wrapper { border-radius: var(--radius); box-shadow: var(--shadow-md); }
+  .leaflet-popup-content { font-family: var(--body); font-size: 0.86rem; }
+  .leaflet-popup-content strong { font-family: var(--display); }
+
+  /* Marcador propio de El Cadillar */
+  .geo-pin { }
+  .geo-pin i { display: block; width: 16px; height: 16px; border-radius: 50%; background: var(--ink); border: 3px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.35); position: relative; z-index: 2; }
+  .geo-pin::after { content: ''; position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: rgba(23,22,18,0.35); animation: geopulse 2.4s ease-out infinite; }
+  @keyframes geopulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(3.4); opacity: 0; } }
+
+  /* Botón de colapso (solo celular) */
+  .geo-toggle { display: none; }
+  @media (max-width: 900px) {
+    .geo { display: block; height: auto; }
+    .geo-toggle {
+      display: flex; align-items: center; justify-content: space-between; width: 100%;
+      padding: 1rem 1.4rem; background: var(--ink); color: var(--paper);
+      font-family: var(--body); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600;
+      position: sticky; top: var(--nav-h); z-index: 20; border: none;
+    }
+    .geo-toggle__chev { width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform var(--transition); }
+    .geo.is-open .geo-toggle__chev { transform: rotate(-135deg); }
+    .geo-panel { display: none; border-right: 0; border-bottom: 1px solid var(--line); }
+    .geo.is-open .geo-panel { display: block; }
+    .geo-map { height: calc(100vh - var(--nav-h) - 52px); min-height: 380px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav nav--solid">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__brand"><div class="nav__logo">C</div><div class="nav__name">Cadillar<span>Cabañas de Tarija</span></div></a>
+    <ul class="nav__links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="cabanas.html">Cabañas</a></li>
+      <li><a href="eventos.html">Eventos</a></li>
+      <li><a href="tarija.html">Descubra Tarija</a></li>
+      <li><a href="mapa.html" class="active">El mapa</a></li>
+      <li><a href="reservas.html">Contacto</a></li>
+    </ul>
+    <a href="reservas.html" class="btn btn--gold nav__cta">Reservar</a>
+    <button class="nav__toggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav__mobile">
+  <a href="index.html">Inicio</a><a href="cabanas.html">Cabañas</a><a href="eventos.html">Eventos</a><a href="tarija.html">Descubra Tarija</a><a href="mapa.html">El mapa</a><a href="reservas.html">Contacto</a><a href="reservas.html" class="btn btn--gold">Reservar</a>
+</div>
+
+<!-- ================= GEOPORTAL ================= -->
+<div class="geo">
+  <button class="geo-toggle" id="geo-toggle" aria-expanded="false"><span>Capas y rutas</span><span class="geo-toggle__chev" aria-hidden="true"></span></button>
+  <!-- Panel de control -->
+  <aside class="geo-panel">
+    <div class="geo-panel__head">
+      <span class="eyebrow">Geoportal</span>
+      <h1>El mapa del entorno</h1>
+      <p class="geo-panel__intro">Explore la ubicación del Cadillar, las rutas de trekking y de bicicleta, y los puntos de interés de los cerros de Tarija. Cambie la vista, active las capas y arme su recorrido.</p>
+    </div>
+
+    <div class="geo-block">
+      <h2>Vista del mapa</h2>
+      <div class="seg" id="seg-base">
+        <button class="is-active" data-base="mapa">Mapa</button>
+        <button data-base="relieve">Relieve</button>
+        <button data-base="satelite">Satélite</button>
+      </div>
+    </div>
+
+    <div class="geo-block">
+      <h2>Capas</h2>
+      <button class="tog is-active" data-layer="trekking"><span class="tog__mark" style="--c:#2e6e4a"></span><span class="tog__label">Rutas de trekking</span><span class="tog__sw"></span></button>
+      <button class="tog is-active" data-layer="bici"><span class="tog__mark" style="--c:#b25034"></span><span class="tog__label">Rutas de bicicleta</span><span class="tog__sw"></span></button>
+      <button class="tog is-active" data-layer="poi"><span class="tog__mark tog__mark--dot" style="--c:#171612"></span><span class="tog__label">Puntos de interés</span><span class="tog__sw"></span></button>
+    </div>
+
+    <div class="geo-block">
+      <h2>Rutas sugeridas</h2>
+      <button class="route" data-focus="trekA">
+        <div class="route__top"><span class="route__chip chip--trek">Trekking</span><span class="ico route__arrow" data-icon="arrow"></span></div>
+        <h3>Sendero del Arroyo</h3>
+        <div class="route__m"><b>3,5 km</b> · circular · Fácil · ~1 h</div>
+      </button>
+      <button class="route" data-focus="trekB">
+        <div class="route__top"><span class="route__chip chip--trek">Trekking</span><span class="ico route__arrow" data-icon="arrow"></span></div>
+        <h3>Subida al Mirador</h3>
+        <div class="route__m"><b>5 km</b> · ida y vuelta · Moderada · ~2 h</div>
+      </button>
+      <button class="route" data-focus="biciA">
+        <div class="route__top"><span class="route__chip chip--bici">Bici</span><span class="ico route__arrow" data-icon="arrow"></span></div>
+        <h3>Circuito de los Cerros</h3>
+        <div class="route__m"><b>12 km</b> · circular · Moderada</div>
+      </button>
+      <button class="route" data-focus="biciB">
+        <div class="route__top"><span class="route__chip chip--bici">Bici</span><span class="ico route__arrow" data-icon="arrow"></span></div>
+        <h3>Bajada a San Lorenzo</h3>
+        <div class="route__m"><b>8 km</b> · lineal · Fácil</div>
+      </button>
+    </div>
+
+    <div class="geo-block">
+      <h2>Puntos de interés</h2>
+      <div id="poi-list"></div>
+    </div>
+
+    <p class="geo-note">Los trazados y tiempos son de referencia y pueden ajustarse a los recorridos reales (o reemplazarse por archivos GPX). Mapa © OpenStreetMap · CARTO · OpenTopoMap · Google.</p>
+  </aside>
+
+  <!-- Mapa -->
+  <div class="geo-map"><div id="map"></div></div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="nav__brand"><div class="nav__logo">C</div><div class="nav__name">Cadillar<span>Cabañas de Tarija</span></div></div>
+        <p>Diez cabañas entre cerros y montañas, en el corazón de los valles de Tarija, Bolivia.</p>
+        <div class="footer__social"><a href="#" aria-label="Instagram"><span class="ico" data-icon="instagram"></span></a><a href="#" aria-label="Facebook"><span class="ico" data-icon="facebook"></span></a><a href="https://wa.me/59170000000" aria-label="WhatsApp"><span class="ico" data-icon="whatsapp"></span></a></div>
+      </div>
+      <div><h4>Explorar</h4><ul><li><a href="cabanas.html">Las cabañas</a></li><li><a href="eventos.html">Eventos</a></li><li><a href="tarija.html">Descubra Tarija</a></li><li><a href="mapa.html">El mapa</a></li><li><a href="reservas.html">Reservas</a></li></ul></div>
+      
+      <div><h4>Contacto</h4><ul class="footer__contact"><li><span class="label">Dirección</span>Camino al Cadillar · a 25 min de Tarija</li><li><span class="label">WhatsApp</span><a href="https://wa.me/59170000000" target="_blank" rel="noopener">+591 700 00000</a></li></ul></div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year></span> Las Cabañas el Cadillar. Todos los derechos reservados.</span>
+      <span class="footer__credit">Desarrollado por <strong>BUCKDI</strong></span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/cabins-data.js"></script>
+<script src="assets/js/cabins-render.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+(function () {
+  const CADILLAR = [-21.499031775530792, -64.77102580573317];
+  // Los trazados de referencia se dibujaron sobre un ancla anterior; se reanclan a la ubicación real
+  const OLD_ANCHOR = [-21.470, -64.780];
+  const dLat = CADILLAR[0] - OLD_ANCHOR[0], dLng = CADILLAR[1] - OLD_ANCHOR[1];
+  const shift = (pts) => pts.map(function (p) { return [p[0] + dLat, p[1] + dLng]; });
+  const map = L.map('map', { scrollWheelZoom: false, zoomControl: true }).setView(CADILLAR, 14);
+
+  // Mapas base
+  const bases = {
+    mapa: L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { subdomains: 'abcd', maxZoom: 20, attribution: '© OpenStreetMap · © CARTO' }),
+    relieve: L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { subdomains: 'abc', maxZoom: 17, attribution: '© OpenTopoMap (CC-BY-SA)' }),
+    satelite: L.tileLayer('https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', { subdomains: ['mt0','mt1','mt2','mt3'], maxZoom: 20, attribution: 'Imágenes © Google' })
+  };
+  let currentBase = 'mapa';
+  bases.mapa.addTo(map);
+  L.control.scale({ imperial: false }).addTo(map);
+
+  // Puntos de interés (coords aprox. Tarija)
+  const poiData = [
+    { n: 'Tomatitas', d: '10 min · balneario', c: [-21.478, -64.792] },
+    { n: 'San Lorenzo', d: '15 min · pueblo histórico', c: [-21.423, -64.752] },
+    { n: 'Ciudad de Tarija', d: '25 min · centro', c: [-21.5355, -64.7296] },
+    { n: 'Cascadas de Coimata', d: '30 min · pozas naturales', c: [-21.401, -64.833] },
+    { n: 'Reserva de Sama', d: '1 h · lagunas de altura', c: [-21.500, -64.950] }
+  ];
+  const poiMarkers = [];
+  const poiLayer = L.layerGroup();
+  poiData.forEach((p, idx) => {
+    const m = L.circleMarker(p.c, { radius: 7, color: '#fff', weight: 2, fillColor: '#171612', fillOpacity: 1 })
+      .bindPopup('<strong>' + p.n + '</strong><br>' + p.d);
+    m.addTo(poiLayer); poiMarkers[idx] = m;
+  });
+  poiLayer.addTo(map);
+
+  // Marcador principal (divIcon propio)
+  const pin = L.divIcon({ className: 'geo-pin', html: '<i></i>', iconSize: [16, 16], iconAnchor: [8, 8] });
+  L.marker(CADILLAR, { icon: pin, zIndexOffset: 1000 }).bindPopup('<strong>Las Cabañas el Cadillar</strong><br>Su refugio de calma · a 25 min de Tarija').addTo(map);
+
+  // Rutas (trazados de referencia)
+  const routes = {
+    trekA: L.polyline(shift([[-21.470,-64.780],[-21.468,-64.775],[-21.463,-64.773],[-21.461,-64.778],[-21.465,-64.783],[-21.470,-64.780]]), { color: '#2e6e4a', weight: 4 }).bindPopup('Sendero del Arroyo · 3,5 km · Fácil'),
+    trekB: L.polyline(shift([[-21.470,-64.780],[-21.465,-64.771],[-21.459,-64.765],[-21.455,-64.760]]), { color: '#2e6e4a', weight: 4 }).bindPopup('Subida al Mirador · 5 km · Moderada'),
+    biciA: L.polyline(shift([[-21.470,-64.780],[-21.481,-64.770],[-21.479,-64.754],[-21.462,-64.747],[-21.449,-64.760],[-21.457,-64.776],[-21.470,-64.780]]), { color: '#b25034', weight: 4 }).bindPopup('Circuito de los Cerros · 12 km · Moderada'),
+    biciB: L.polyline(shift([[-21.470,-64.780],[-21.455,-64.772],[-21.440,-64.762],[-21.423,-64.752]]), { color: '#b25034', weight: 4 }).bindPopup('Bajada a San Lorenzo · 8 km · Fácil')
+  };
+  const overlays = {
+    trekking: L.layerGroup([routes.trekA, routes.trekB]).addTo(map),
+    bici: L.layerGroup([routes.biciA, routes.biciB]).addTo(map),
+    poi: poiLayer
+  };
+
+  // Vista inicial que abarca todo
+  const bounds = L.latLngBounds([CADILLAR].concat(poiData.map(p => p.c)));
+  Object.values(routes).forEach(r => bounds.extend(r.getBounds()));
+  map.fitBounds(bounds.pad(0.12));
+
+  // Lista de puntos de interés en el panel
+  const poiList = document.getElementById('poi-list');
+  poiData.forEach((p, idx) => {
+    const b = document.createElement('button');
+    b.className = 'poi-item';
+    b.innerHTML = '<span class="poi-item__n">' + p.n + '</span><span class="poi-item__d">' + p.d.split(' · ')[0] + '</span>';
+    b.addEventListener('click', () => { map.setView(p.c, 14, { animate: true }); poiMarkers[idx].openPopup(); });
+    poiList.appendChild(b);
+  });
+
+  // Cambio de mapa base
+  document.querySelectorAll('#seg-base button').forEach(btn => btn.addEventListener('click', () => {
+    const k = btn.dataset.base; if (k === currentBase) return;
+    map.removeLayer(bases[currentBase]); bases[k].addTo(map); currentBase = k;
+    document.querySelectorAll('#seg-base button').forEach(x => x.classList.toggle('is-active', x === btn));
+  }));
+
+  // Capas on/off
+  document.querySelectorAll('.tog').forEach(t => t.addEventListener('click', () => {
+    const k = t.dataset.layer; const on = t.classList.toggle('is-active');
+    if (on) overlays[k].addTo(map); else map.removeLayer(overlays[k]);
+  }));
+
+  // Enfocar ruta
+  document.querySelectorAll('.route[data-focus]').forEach(card => card.addEventListener('click', () => {
+    const r = routes[card.getAttribute('data-focus')]; if (!r) return;
+    const grp = card.getAttribute('data-focus').indexOf('trek') === 0 ? 'trekking' : 'bici';
+    if (!map.hasLayer(overlays[grp])) { overlays[grp].addTo(map); document.querySelector('.tog[data-layer="' + grp + '"]').classList.add('is-active'); }
+    map.fitBounds(r.getBounds().pad(0.5)); r.openPopup();
+  }));
+
+  // Colapsar/expandir panel en celular
+  const geoToggle = document.getElementById('geo-toggle');
+  if (geoToggle) geoToggle.addEventListener('click', () => {
+    const geo = document.querySelector('.geo');
+    const open = geo.classList.toggle('is-open');
+    geoToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    setTimeout(() => map.invalidateSize(), 350);
+  });
+
+  if (window.applyIcons) window.applyIcons(document);
+})();
+</script>
+</body>
+</html>
