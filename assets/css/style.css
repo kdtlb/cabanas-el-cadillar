@@ -518,6 +518,9 @@ strong, b { font-weight: 600; color: var(--ink); }
 .footer__social a:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
 .footer__bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 3.5rem; padding-top: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.55rem; font-size: 0.78rem; opacity: 0.85; }
 .footer__credit { opacity: 0.92; }
+.footer__photos { font-size: 0.68rem; opacity: 0.55; max-width: 74ch; line-height: 1.6; }
+.footer__photos a { border-bottom: 1px solid rgba(255,255,255,0.25); }
+.footer__photos a:hover { color: var(--paper); }
 .footer__credit a, .footer__credit strong { color: var(--paper); font-weight: 600; letter-spacing: 0.04em; }
 .footer__credit a { border-bottom: 1px solid rgba(255,255,255,0.28); padding-bottom: 1px; transition: var(--transition); }
 .footer__credit a:hover { border-color: var(--paper); }
