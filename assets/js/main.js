@@ -139,6 +139,57 @@
     });
   });
 
+  /* ---- Visor de fotos (galerías) ---- */
+  (function () {
+    const links = Array.prototype.slice.call(document.querySelectorAll('.gallery a, .cabin-gallery a'));
+    if (!links.length) return;
+
+    const box = document.createElement('div');
+    box.className = 'lb';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-label', 'Visor de fotos');
+    box.innerHTML =
+      '<span class="lb__count"></span>' +
+      '<button class="lb__btn lb__close" aria-label="Cerrar">&times;</button>' +
+      '<button class="lb__btn lb__prev" aria-label="Foto anterior"><span class="ico" data-icon="arrow-left"></span></button>' +
+      '<button class="lb__btn lb__next" aria-label="Foto siguiente"><span class="ico" data-icon="arrow"></span></button>' +
+      '<figure class="lb__fig"><img class="lb__img" alt=""><figcaption class="lb__cap"></figcaption></figure>';
+    document.body.appendChild(box);
+    if (window.applyIcons) window.applyIcons(box);
+
+    const imgEl = box.querySelector('.lb__img');
+    const capEl = box.querySelector('.lb__cap');
+    const countEl = box.querySelector('.lb__count');
+    let i = 0;
+
+    function srcOf(a) {
+      const img = a.querySelector('img');
+      return a.getAttribute('href') || (img && img.getAttribute('src')) || '';
+    }
+    function show(n) {
+      i = (n + links.length) % links.length;
+      const a = links[i], img = a.querySelector('img');
+      imgEl.src = srcOf(a);
+      imgEl.alt = (img && img.alt) || '';
+      capEl.textContent = (img && img.alt) || '';
+      countEl.textContent = (i + 1) + ' / ' + links.length;
+    }
+    function open(n) { show(n); box.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function close() { box.classList.remove('open'); document.body.style.overflow = ''; }
+
+    links.forEach((a, n) => a.addEventListener('click', (e) => { e.preventDefault(); open(n); }));
+    box.querySelector('.lb__close').addEventListener('click', close);
+    box.querySelector('.lb__prev').addEventListener('click', (e) => { e.stopPropagation(); show(i - 1); });
+    box.querySelector('.lb__next').addEventListener('click', (e) => { e.stopPropagation(); show(i + 1); });
+    box.addEventListener('click', (e) => { if (e.target === box || e.target.classList.contains('lb__fig')) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (!box.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') show(i - 1);
+      else if (e.key === 'ArrowRight') show(i + 1);
+    });
+  })();
+
   /* ---- Año dinámico en footer ---- */
   document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 

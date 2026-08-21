@@ -40,6 +40,10 @@
   .tog:last-child { border-bottom: 0; }
   .tog__mark { width: 22px; height: 3px; border-radius: 2px; background: var(--c); flex: none; }
   .tog__mark--dot { width: 12px; height: 12px; border-radius: 50%; }
+  /* Referencia fija: la ubicación de las cabañas */
+  .legend-fixed { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0 0.75rem; margin-bottom: 0.35rem; border-bottom: 1px solid var(--line); }
+  .legend-fixed__pin { width: 13px; height: 17px; flex: none; background: #bd6a41; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(23,22,18,0.18); border-radius: 50% 50% 50% 50% / 42% 42% 62% 62%; clip-path: polygon(50% 100%, 0 55%, 0 0, 100% 0, 100% 55%); }
+  .legend-fixed__txt { font-size: 0.8rem; color: var(--ink); font-weight: 500; }
   .tog__label { font-size: 0.9rem; }
   .tog__sw { margin-left: auto; width: 38px; height: 21px; border-radius: 100px; background: var(--line-2); position: relative; flex: none; transition: var(--transition); }
   .tog__sw::after { content: ''; position: absolute; top: 2.5px; left: 2.5px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: var(--transition); box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
@@ -80,11 +84,18 @@
   .leaflet-popup-content { font-family: var(--body); font-size: 0.86rem; }
   .leaflet-popup-content strong { font-family: var(--display); }
 
-  /* Marcador propio de El Cadillar */
-  .geo-pin { }
-  .geo-pin i { display: block; width: 16px; height: 16px; border-radius: 50%; background: var(--ink); border: 3px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.35); position: relative; z-index: 2; }
-  .geo-pin::after { content: ''; position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: rgba(23,22,18,0.35); animation: geopulse 2.4s ease-out infinite; }
-  @keyframes geopulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(3.4); opacity: 0; } }
+  /* Marcador propio de El Cadillar — pin terracota, distinto de los puntos de interés */
+  .geo-pin { position: relative; }
+  .geo-pin svg { position: relative; z-index: 3; display: block; filter: drop-shadow(0 5px 12px rgba(0,0,0,0.45)); }
+  .geo-pin::after { content: ''; position: absolute; left: 50%; bottom: 0; width: 16px; height: 16px; margin: 0 0 -8px -8px; border-radius: 50%; background: rgba(189,106,65,0.5); z-index: 1; animation: geopulse 2.4s ease-out infinite; }
+  .geo-pin__label {
+    position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 5px;
+    background: var(--ink); color: var(--paper); z-index: 4;
+    font-family: var(--body); font-size: 0.6rem; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap;
+    padding: 3px 8px; border-radius: 2px; box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+  }
+  @keyframes geopulse { 0% { transform: scale(1); opacity: 0.55; } 100% { transform: scale(3.6); opacity: 0; } }
 
   /* Botón de colapso (solo celular) */
   .geo-toggle { display: none; }
@@ -147,6 +158,7 @@
 
     <div class="geo-block">
       <h2>Capas</h2>
+      <div class="legend-fixed"><span class="legend-fixed__pin"></span><span class="legend-fixed__txt">Las Cabañas el Cadillar</span></div>
       <button class="tog is-active" data-layer="trekking"><span class="tog__mark" style="--c:#2e6e4a"></span><span class="tog__label">Rutas de trekking</span><span class="tog__sw"></span></button>
       <button class="tog is-active" data-layer="bici"><span class="tog__mark" style="--c:#b25034"></span><span class="tog__label">Rutas de bicicleta</span><span class="tog__sw"></span></button>
       <button class="tog is-active" data-layer="poi"><span class="tog__mark tog__mark--dot" style="--c:#171612"></span><span class="tog__label">Puntos de interés</span><span class="tog__sw"></span></button>
@@ -249,7 +261,15 @@
   poiLayer.addTo(map);
 
   // Marcador principal (divIcon propio)
-  const pin = L.divIcon({ className: 'geo-pin', html: '<i></i>', iconSize: [16, 16], iconAnchor: [8, 8] });
+  const pin = L.divIcon({
+    className: 'geo-pin',
+    html: '<svg width="34" height="46" viewBox="0 0 34 46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+            '<path d="M17 44.5C17 44.5 31.5 26.8 31.5 16.5A14.5 14.5 0 1 0 2.5 16.5C2.5 26.8 17 44.5 17 44.5Z" fill="#bd6a41" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/>' +
+            '<circle cx="17" cy="16.5" r="5.4" fill="#fff"/>' +
+          '</svg>' +
+          '<b class="geo-pin__label">El Cadillar</b>',
+    iconSize: [34, 46], iconAnchor: [17, 46], popupAnchor: [0, -42]
+  });
   L.marker(CADILLAR, { icon: pin, zIndexOffset: 1000 }).bindPopup('<strong>Las Cabañas el Cadillar</strong><br>Su refugio de calma · a 25 min de Tarija').addTo(map);
 
   // Rutas (trazados de referencia)
