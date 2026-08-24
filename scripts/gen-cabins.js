@@ -195,7 +195,7 @@ const page = (c, i) => {
 
 <!-- CTA -->
 <section class="cta">
-  <div class="cta__bg"><img src="${U('1470071459604-3b5ec3a7fe05',2000)}" alt="Valle de Tarija"></div>
+  <div class="cta__bg"><img src="../assets/img/predio/predio-vista.jpg" alt="Valle de Tarija"></div>
   <div class="container reveal">
     <span class="eyebrow eyebrow--light eyebrow--center">¿Todavía decidiendo?</span>
     <h2>Conozca las otras cabañas</h2>

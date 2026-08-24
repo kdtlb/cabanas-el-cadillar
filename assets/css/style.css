@@ -4,21 +4,22 @@
    ========================================================================== */
 
 :root {
-  /* Paleta monocromática cálida-neutra */
-  --paper:     #f1efe9;   /* fondo */
-  --surface:   #f8f7f3;   /* tarjetas / superficies claras */
-  --ink:       #171612;   /* texto/negro cálido */
-  --ink-2:     #37352e;   /* texto secundario fuerte */
-  --muted:     #7c766b;   /* texto terciario */
-  --dark:      #131210;   /* secciones oscuras (casi negro) */
-  --dark-2:    #201e18;
-  --line:      rgba(23, 22, 18, 0.12);
-  --line-2:    rgba(23, 22, 18, 0.26);
-  --on-dark:   rgba(241, 239, 233, 0.68);
-  --on-dark-2: rgba(241, 239, 233, 0.42);
+  /* Paleta de tierra: adobe, madera y piedra del valle */
+  --paper:     #f2ebdf;   /* fondo: arena cálida */
+  --surface:   #faf5ea;   /* tarjetas / superficies claras */
+  --tint:      #e8ddc9;   /* franjas de sección (tierra clara) */
+  --ink:       #1e1710;   /* texto: marrón muy oscuro */
+  --ink-2:     #423625;   /* texto secundario fuerte */
+  --muted:     #8a7c66;   /* texto terciario */
+  --dark:      #1c1611;   /* secciones oscuras: madera quemada */
+  --dark-2:    #2a211a;
+  --line:      rgba(74, 56, 34, 0.16);
+  --line-2:    rgba(74, 56, 34, 0.32);
+  --on-dark:   rgba(242, 235, 223, 0.70);
+  --on-dark-2: rgba(242, 235, 223, 0.44);
   --white:     #ffffff;
-  --accent:    #bd6a41;   /* terracota — acento visible en claro y oscuro (botones) */
-  --accent-2:  #a3552e;   /* terracota hover */
+  --accent:    #b4623a;   /* terracota — acento visible en claro y oscuro (botones) */
+  --accent-2:  #974b28;   /* terracota hover */
 
   /* Tipografía */
   --display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -29,9 +30,9 @@
 
   /* Medidas */
   --maxw: 1400px;
-  --radius: 2px;
-  --shadow-sm: 0 2px 20px rgba(20, 18, 12, 0.05);
-  --shadow-md: 0 30px 80px rgba(20, 18, 12, 0.13);
+  --radius: 4px;
+  --shadow-sm: 0 2px 20px rgba(60, 42, 22, 0.07);
+  --shadow-md: 0 26px 70px rgba(60, 42, 22, 0.16);
   --transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -54,6 +55,15 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+/* Grano de papel: textura sutil que quita el plano digital y da tacto de adobe */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  opacity: 0.05; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+@media (prefers-reduced-motion: reduce) { body::before { opacity: 0.035; } }
+
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
@@ -385,8 +395,8 @@ strong, b { font-weight: 600; color: var(--ink); }
 /* Galería en mosaico: respeta la proporción real de cada foto (sin recortes) */
 .gallery { column-count: 3; column-gap: 12px; }
 .gallery a { display: block; break-inside: avoid; margin-bottom: 12px; border-radius: var(--radius); overflow: hidden; position: relative; cursor: zoom-in; background: var(--surface); }
-.gallery img { width: 100%; height: auto; display: block; transition: transform 0.9s var(--ease), filter 0.5s var(--ease); filter: grayscale(0.12); }
-.gallery a:hover img { transform: scale(1.04); filter: grayscale(0); }
+.gallery img { width: 100%; height: auto; display: block; transition: transform 0.9s var(--ease), filter 0.5s var(--ease); filter: none; }
+.gallery a:hover img { transform: scale(1.04); filter: none; }
 .gallery a::after { content: ''; position: absolute; inset: 0; background: rgba(23,22,18,0.16); opacity: 0; transition: opacity 0.35s var(--ease); }
 .gallery a:hover::after { opacity: 1; }
 
@@ -418,7 +428,7 @@ strong, b { font-weight: 600; color: var(--ink); }
 .testi__stars { color: var(--ink); letter-spacing: 3px; margin-bottom: 1.1rem; font-size: 0.8rem; }
 .testi p { font-family: var(--display); font-size: 1.3rem; line-height: 1.35; color: var(--ink); margin-bottom: 1.6rem; font-weight: 400; letter-spacing: -0.02em; }
 .testi__author { display: flex; align-items: center; gap: 0.9rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
-.testi__avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; filter: grayscale(1); }
+.testi__avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; filter: none; }
 .testi__author b { display: block; font-size: 0.88rem; font-weight: 600; color: var(--ink); }
 .testi__author span { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
 
@@ -654,7 +664,7 @@ strong, b { font-weight: 600; color: var(--ink); }
 .info-item p { font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
 .info-item a { color: var(--ink) !important; border-bottom: 1px solid var(--line-2); }
 .map-embed { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); margin-top: 2rem; height: 280px; }
-.map-embed iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.4); }
+.map-embed iframe { width: 100%; height: 100%; border: 0; filter: sepia(0.12) saturate(1.05); }
 .faq-item { padding: 2rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
 .faq-item h3 { font-size: 1.15rem; margin-bottom: 0.5rem; font-weight: 500; }
 .faq-item p { color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
