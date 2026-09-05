@@ -48,6 +48,11 @@
   --nav-h: 82px;
   --nav-h-min: 66px;   /* la barra superior encoge a esto al bajar */
   --secnav-h: 53px;    /* alto de la barra de secciones (solo celular) */
+
+  /* Verde del botón de WhatsApp: el salvia del manual llevado a un tono
+     profundo, para que resalte y admita texto blanco (6:1 de contraste) */
+  --verde: #4E6B33;
+  --verde-2: #3F5729;
 }
 
 ::selection { background: var(--ink); color: var(--paper); }
@@ -509,15 +514,15 @@ strong, b { font-weight: 600; color: var(--ink); }
   display: flex; flex-direction: column; align-items: flex-end; gap: 0.6rem;
 }
 
-/* Principal: pastilla en el marrón de la marca, no en el verde de WhatsApp */
+/* Principal: pastilla en verde profundo, emparentado con el salvia del manual */
 .wa-float {
   display: inline-flex; align-items: center; gap: 0.6rem;
   height: 54px; padding: 0 1.15rem; border-radius: 100px;
-  background: var(--corteza); color: #fff;
+  background: var(--verde); color: #fff;
   box-shadow: 0 10px 26px rgba(31,23,17,0.34), 0 0 0 1px rgba(255,255,255,0.14);
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
 }
-.wa-float:hover { background: var(--accent-2); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(31,23,17,0.4), 0 0 0 1px rgba(255,255,255,0.18); }
+.wa-float:hover { background: var(--verde-2); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(31,23,17,0.4), 0 0 0 1px rgba(255,255,255,0.18); }
 .wa-float svg { width: 25px; height: 25px; flex: none; }
 .wa-float__label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
 
