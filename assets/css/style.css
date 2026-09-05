@@ -4,22 +4,31 @@
    ========================================================================== */
 
 :root {
-  /* Paleta de tierra: adobe, madera y piedra del valle */
-  --paper:     #f2ebdf;   /* fondo: arena cálida */
-  --surface:   #faf5ea;   /* tarjetas / superficies claras */
-  --tint:      #e8ddc9;   /* franjas de sección (tierra clara) */
-  --ink:       #1e1710;   /* texto: marrón muy oscuro */
-  --ink-2:     #423625;   /* texto secundario fuerte */
-  --muted:     #8a7c66;   /* texto terciario */
-  --dark:      #1c1611;   /* secciones oscuras: madera quemada */
-  --dark-2:    #2a211a;
-  --line:      rgba(74, 56, 34, 0.16);
-  --line-2:    rgba(74, 56, 34, 0.32);
-  --on-dark:   rgba(242, 235, 223, 0.70);
-  --on-dark-2: rgba(242, 235, 223, 0.44);
+  /* ---- Paleta oficial del manual de marca (El Cadillar Apart Hotel) ----
+     Marrón Corteza #61483A · Blanco #FFFFFF · Verde Salvia #BDC497
+     Celeste Cielo #C8DAE7 · Amarillo Sol #FAEDAF · Madera Cálida #CBAF9A   */
+  --corteza:   #61483A;   /* principal: logotipo, textos y contornos */
+  --salvia:    #BDC497;   /* ladera: naturaleza y fondos */
+  --cielo:     #C8DAE7;   /* cielo: fondos calmos */
+  --sol:       #FAEDAF;   /* sol: calidez y destacados */
+  --madera:    #CBAF9A;   /* casa: neutro cálido */
+
+  --paper:     #ffffff;   /* fondo principal (manual) */
+  --surface:   #fbf8f3;   /* tarjetas: madera cálida muy diluida */
+  --tint:      #fcf6df;   /* franjas de sección: amarillo sol suavizado */
+  --tint-2:    #eef1e5;   /* franjas alternas: verde salvia suavizado */
+  --ink:       #4a372b;   /* texto principal (corteza profundo) */
+  --ink-2:     #61483A;   /* marrón corteza de marca */
+  --muted:     #7d6b5a;   /* texto terciario, legible sobre blanco */
+  --dark:      #4e3a2c;   /* secciones oscuras: corteza profundo */
+  --dark-2:    #61483A;
+  --line:      rgba(97, 72, 58, 0.18);
+  --line-2:    rgba(97, 72, 58, 0.34);
+  --on-dark:   rgba(255, 255, 255, 0.74);
+  --on-dark-2: rgba(255, 255, 255, 0.48);
   --white:     #ffffff;
-  --accent:    #b4623a;   /* terracota — acento visible en claro y oscuro (botones) */
-  --accent-2:  #974b28;   /* terracota hover */
+  --accent:    #61483A;   /* marrón corteza: botones y acentos */
+  --accent-2:  #402e23;   /* hover */
 
   /* Tipografía */
   --display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -197,7 +206,7 @@ strong, b { font-weight: 600; color: var(--ink); }
 .nav__links a:hover::after, .nav__links a.active::after { width: 100%; }
 
 .nav.scrolled { height: 66px; }
-.nav.scrolled, .nav--solid { background: rgba(241, 239, 233, 0.85); backdrop-filter: blur(18px) saturate(1.05); border-bottom: 1px solid var(--line); }
+.nav.scrolled, .nav--solid { background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(18px) saturate(1.05); border-bottom: 1px solid var(--line); }
 .nav.scrolled .nav__name, .nav--solid .nav__name { color: var(--ink); }
 .nav.scrolled .nav__logo, .nav--solid .nav__logo { color: var(--ink); border-color: var(--line-2); }
 .nav.scrolled .nav__links a, .nav--solid .nav__links a { color: var(--ink); }
@@ -890,3 +899,18 @@ details.faq-item > p { padding: 0 1.3rem 1.25rem; color: var(--muted); font-size
 /* Al saltar desde la barra de secciones, dejar aire para el nav y la propia barra */
 [data-nav], [id] { scroll-margin-top: calc(var(--nav-h) + 8px); }
 @media (max-width: 860px) { [data-nav] { scroll-margin-top: calc(var(--nav-h) + 56px); } }
+
+
+/* --- Logotipo de marca (manual: El Cadillar Apart Hotel) --- */
+.nav__logo-img { height: 52px; width: auto; display: block; transition: opacity var(--transition); }
+.nav__logo-img--oscuro { display: none; }
+.nav.scrolled .nav__logo-img--claro, .nav--solid .nav__logo-img--claro { display: none; }
+.nav.scrolled .nav__logo-img--oscuro, .nav--solid .nav__logo-img--oscuro { display: block; }
+.nav.scrolled .nav__logo-img, .nav--solid .nav__logo-img { height: 44px; }
+.nav__mobile__head .nav__logo-img--claro { display: block; }
+.nav__mobile__head .nav__logo-img--oscuro { display: none; }
+.footer__logo { width: 132px; height: auto; display: block; }
+@media (max-width: 640px) {
+  .nav__logo-img, .nav.scrolled .nav__logo-img, .nav--solid .nav__logo-img { height: 40px; }
+  .footer__logo { width: 108px; }
+}

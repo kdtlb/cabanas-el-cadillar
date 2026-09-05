@@ -1,4 +1,4 @@
-/* Las Cabañas el Cadillar — interacciones */
+/* El Cadillar Apart Hotel — interacciones */
 (function () {
   'use strict';
 
@@ -29,12 +29,14 @@
         if (l.classList && l.classList.contains('btn')) l.remove(); // el "Reservar" se reemplaza por el CTA del pie
         else wrap.appendChild(l);
       });
+      // Las fichas de cabaña viven en /cabanas/, así que la ruta se resuelve relativa
+      const base = /\/cabanas\//.test(location.pathname) ? '../' : '';
       const head = document.createElement('div');
       head.className = 'nav__mobile__head';
-      head.innerHTML = '<a href="index.html" class="nav__brand"><div class="nav__logo">C</div><div class="nav__name">Cadillar<span>Cabañas de Tarija</span></div></a><button class="nav__mobile__close" aria-label="Cerrar menú"><span></span><span></span></button>';
+      head.innerHTML = '<a href="' + base + 'index.html" class="nav__brand"><img class="nav__logo-img" src="' + base + 'assets/img/marca/logo-horizontal-blanco.png" alt="El Cadillar Apart Hotel" width="460" height="181"></a><button class="nav__mobile__close" aria-label="Cerrar menú"><span></span><span></span></button>';
       const foot = document.createElement('div');
       foot.className = 'nav__mobile__foot';
-      foot.innerHTML = '<span class="nav__mobile__foot-label">¿Consultas? Estamos para ayudarle</span><a class="btn btn--gold" href="https://wa.me/59170000000?text=Hola,%20quiero%20consultar%20por%20Las%20Caba%C3%B1as%20el%20Cadillar" target="_blank" rel="noopener">Escríbanos por WhatsApp</a>';
+      foot.innerHTML = '<span class="nav__mobile__foot-label">¿Consultas? Estamos para ayudarle</span><a class="btn btn--gold" href="https://wa.me/59170000000?text=Hola,%20quiero%20consultar%20por%20El%20Cadillar%20Apart%20Hotel" target="_blank" rel="noopener">Escríbanos por WhatsApp</a>';
       mobile.appendChild(head);
       mobile.appendChild(wrap);
       mobile.appendChild(foot);
@@ -326,7 +328,7 @@
   if (!document.querySelector('.wa-float')) {
     const wa = document.createElement('a');
     wa.className = 'wa-float';
-    wa.href = 'https://wa.me/59170000000?text=Hola,%20quiero%20consultar%20por%20Las%20Caba%C3%B1as%20el%20Cadillar';
+    wa.href = 'https://wa.me/59170000000?text=Hola,%20quiero%20consultar%20por%20El%20Cadillar%20Apart%20Hotel';
     wa.target = '_blank';
     wa.rel = 'noopener';
     wa.setAttribute('aria-label', 'Escríbanos por WhatsApp');

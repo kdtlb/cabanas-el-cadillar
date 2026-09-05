@@ -1,9 +1,7 @@
-# Fotos y video originales subidos por el usuario (ya copiados a assets/).
-# No se publican para no duplicar ~34 MB; se conservan solo en local.
+# Material de origen de la marca (archivos .ai / manual): se conserva en local,
+# no se publica porque el sitio se sirve entero desde GitHub Pages.
+DISEÑO/
 Imagenes/
 
-# Basura del sistema operativo
-.DS_Store
-Thumbs.db
-desktop.ini
-*.log
+# Herramienta interna para redimensionar imágenes, no forma parte del sitio
+_r.html
