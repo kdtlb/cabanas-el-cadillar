@@ -982,18 +982,21 @@ details.faq-item > p { padding: 0 1.3rem 1.25rem; color: var(--muted); font-size
 @media (max-width: 860px) { [data-nav] { scroll-margin-top: calc(var(--nav-h-min) + var(--secnav-h) + 10px); } }
 
 
-/* --- Logotipo de marca (manual: El Cadillar Apart Hotel) --- */
-.nav__logo-img { height: 52px; width: auto; display: block; transition: opacity var(--transition); }
+/* --- Logotipo de marca (manual: El Cadillar Apart Hotel) ---
+   Los PNG vienen recortados a su contenido, así que el alto de aquí es
+   logo de verdad y no margen transparente. La barra mide 82px y baja a
+   66px al hacer scroll: estas medidas dejan aire arriba y abajo. */
+.nav__logo-img { height: 58px; width: auto; display: block; transition: opacity var(--transition); }
 .nav__logo-img--oscuro { display: none; }
 .nav.scrolled .nav__logo-img--claro, .nav--solid .nav__logo-img--claro { display: none; }
 .nav.scrolled .nav__logo-img--oscuro, .nav--solid .nav__logo-img--oscuro { display: block; }
-.nav.scrolled .nav__logo-img, .nav--solid .nav__logo-img { height: 44px; }
+.nav.scrolled .nav__logo-img, .nav--solid .nav__logo-img { height: 48px; }
 .nav__mobile__head .nav__logo-img--claro { display: block; }
 .nav__mobile__head .nav__logo-img--oscuro { display: none; }
-.footer__logo { width: 132px; height: auto; display: block; }
+.footer__logo { width: 116px; height: auto; display: block; }
 @media (max-width: 640px) {
-  .nav__logo-img, .nav.scrolled .nav__logo-img, .nav--solid .nav__logo-img { height: 40px; }
-  .footer__logo { width: 108px; }
+  .nav__logo-img, .nav.scrolled .nav__logo-img, .nav--solid .nav__logo-img { height: 46px; }
+  .footer__logo { width: 96px; }
 }
 
 /* ==========================================================================
@@ -1007,6 +1010,10 @@ details.faq-item > p { padding: 0 1.3rem 1.25rem; color: var(--muted); font-size
 /* Sin esto el filtro no oculta nada: cualquier regla que fije display
    (como .cabin-card { display: flex }) le gana al atributo hidden */
 [hidden] { display: none !important; }
+
+/* La barra de filtros va pegada a la portada: con el relleno normal de
+   sección quedaban 160px de blanco entre la foto y los controles */
+.section--filtros { padding-top: clamp(2.2rem, 4.5vw, 3.2rem); }
 
 .filtros {
   display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem 2.4rem;

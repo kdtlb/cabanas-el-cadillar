@@ -33,7 +33,7 @@
       const base = /\/cabanas\//.test(location.pathname) ? '../' : '';
       const head = document.createElement('div');
       head.className = 'nav__mobile__head';
-      head.innerHTML = '<a href="' + base + 'index.html" class="nav__brand"><img class="nav__logo-img" src="' + base + 'assets/img/marca/logo-horizontal-blanco.png" alt="El Cadillar Apart Hotel" width="460" height="181"></a><button class="nav__mobile__close" aria-label="Cerrar menú"><span></span><span></span></button>';
+      head.innerHTML = '<a href="' + base + 'index.html" class="nav__brand"><img class="nav__logo-img" src="' + base + 'assets/img/marca/logo-horizontal-blanco.png" alt="El Cadillar Apart Hotel" width="398" height="167"></a><button class="nav__mobile__close" aria-label="Cerrar menú"><span></span><span></span></button>';
       const foot = document.createElement('div');
       foot.className = 'nav__mobile__foot';
       foot.innerHTML = '<span class="nav__mobile__foot-label">¿Consultas? Estamos para ayudarle</span><a class="btn btn--gold" href="https://wa.me/59170000000?text=Hola,%20quiero%20consultar%20por%20El%20Cadillar%20Apart%20Hotel" target="_blank" rel="noopener">Escríbanos por WhatsApp</a>';

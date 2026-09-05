@@ -80,7 +80,7 @@ const page = (c, i) => {
 <nav class="nav nav--solid">
   <div class="nav__inner">
     <a href="../index.html" class="nav__brand">
-      <img class="nav__logo-img nav__logo-img--claro" src="../assets/img/marca/logo-horizontal-blanco.png" alt="El Cadillar Apart Hotel" width="460" height="181"><img class="nav__logo-img nav__logo-img--oscuro" src="../assets/img/marca/logo-horizontal.png" alt="" aria-hidden="true" width="460" height="181">
+      <img class="nav__logo-img nav__logo-img--claro" src="../assets/img/marca/logo-horizontal-blanco.png" alt="El Cadillar Apart Hotel" width="398" height="167"><img class="nav__logo-img nav__logo-img--oscuro" src="../assets/img/marca/logo-horizontal.png" alt="" aria-hidden="true" width="398" height="167">
     </a>
     <ul class="nav__links">
       <li><a href="../index.html">Inicio</a></li>
@@ -210,7 +210,7 @@ const page = (c, i) => {
   <div class="container">
     <div class="footer__grid">
       <div class="footer__brand">
-        <div class="nav__brand"><img class="footer__logo" src="../assets/img/marca/logo-vertical-blanco.png" alt="El Cadillar Apart Hotel" width="360" height="367"></div>
+        <div class="nav__brand"><img class="footer__logo" src="../assets/img/marca/logo-vertical-blanco.png" alt="El Cadillar Apart Hotel" width="268" height="316"></div>
         <p>Diez cabañas entre cerros y montañas, en el corazón de los valles de Tarija, Bolivia.</p>
         <div class="footer__social"><a href="#" aria-label="Instagram"><span class="ico" data-icon="instagram"></span></a><a href="#" aria-label="Facebook"><span class="ico" data-icon="facebook"></span></a><a href="https://wa.me/59170000000" aria-label="WhatsApp"><span class="ico" data-icon="whatsapp"></span></a></div>
       </div>
