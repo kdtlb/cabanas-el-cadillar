@@ -322,17 +322,13 @@ strong, b { font-weight: 600; color: var(--ink); }
 }
 .cabin-card:hover { transform: translateY(-5px); box-shadow: 0 16px 36px rgba(31,23,17,0.13); }
 
-.cabin-card__top { position: relative; overflow: hidden; padding: 1.15rem 1.4rem 1.3rem; min-height: 104px; }
+/* La banda se ajusta a su contenido: el alto fijo era para el sello */
+.cabin-card__top { position: relative; overflow: hidden; padding: 1.15rem 1.4rem 1.25rem; }
 .cabin-card--salvia .cabin-card__top { background: var(--salvia); }
 .cabin-card--cielo  .cabin-card__top { background: var(--cielo); }
 .cabin-card--madera .cabin-card__top { background: var(--madera); }
 .cabin-card--sol    .cabin-card__top { background: var(--sol); }
 
-/* El isotipo a trazo, desbordado por la esquina: sello, no calcomanía */
-.cabin-card__seal {
-  position: absolute; right: -34px; bottom: -52px; width: 150px; height: auto;
-  opacity: 0.26; pointer-events: none;
-}
 .cabin-card__num {
   position: relative; z-index: 1; display: block;
   font-family: var(--display); font-size: 1.75rem; font-weight: 600;
@@ -935,10 +931,9 @@ details.faq-item > p { padding: 0 1.3rem 1.25rem; color: var(--muted); font-size
 
   /* Las diez cabañas en dos columnas: de 10 pantallas a la mitad */
   .cabins__grid { grid-template-columns: 1fr 1fr; gap: 0.8rem 0.7rem; }
-  .cabin-card__top { padding: 0.8rem 0.9rem 0.9rem; min-height: 74px; }
+  .cabin-card__top { padding: 0.8rem 0.9rem 0.85rem; }
   .cabin-card__num { font-size: 1.25rem; }
   .cabin-card__tag { font-size: 0.5rem; letter-spacing: 0.12em; margin-top: 0.35rem; }
-  .cabin-card__seal { width: 104px; right: -24px; bottom: -36px; }
   .cabin-card__body { padding: 0.9rem 0.9rem 1rem; }
   .cabin-card__body h3 { font-size: 1.05rem; margin-bottom: 0.7rem; }
   .cabin-card__specs { gap: 0.9rem; padding-top: 0.7rem; }

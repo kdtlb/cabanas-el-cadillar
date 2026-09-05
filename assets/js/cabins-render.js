@@ -22,7 +22,6 @@
       <div class="cabin-card__top">
         <span class="cabin-card__num">${n}</span>
         <span class="cabin-card__tag">${c.tag}</span>
-        <img class="cabin-card__seal" src="${base()}assets/img/marca/sello.png" alt="" aria-hidden="true" width="360" height="360" loading="lazy">
       </div>
       <div class="cabin-card__body">
         <h3><a href="${c.url}">${c.name}</a></h3>
@@ -48,7 +47,7 @@
     const head = document.createElement('div');
     head.className = 'cabin-group__head reveal';
     head.innerHTML =
-      '<h3>Para ' + (EN_LETRAS[pax] || pax) + ' personas</h3>' +
+      '<h3>Hasta ' + (EN_LETRAS[pax] || pax) + ' personas</h3>' +
       '<span class="cabin-group__count">' + cuenta + '</span>';
     const grid = document.createElement('div');
     grid.className = 'cabins__grid';
