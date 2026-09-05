@@ -188,6 +188,9 @@
     const hero = document.querySelector('.hero, .page-header, .tarija-hero');
     if (hero && hero.parentNode) hero.parentNode.insertBefore(bar, hero.nextSibling);
     else document.body.insertBefore(bar, document.body.firstChild);
+    // Avisa al CSS: en las páginas con esta barra, los paneles a pantalla
+    // completa descuentan su alto para no quedar por debajo
+    document.documentElement.classList.add('has-secnav');
 
     const links = Array.prototype.slice.call(list.children);
     const io = new IntersectionObserver(entries => {

@@ -46,6 +46,8 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   --nav-h: 82px;
+  --nav-h-min: 66px;   /* la barra superior encoge a esto al bajar */
+  --secnav-h: 53px;    /* alto de la barra de secciones (solo celular) */
 }
 
 ::selection { background: var(--ink); color: var(--paper); }
@@ -384,6 +386,21 @@ strong, b { font-weight: 600; color: var(--ink); }
 .tarija-hero__bg img { width: 100%; height: 100%; object-fit: cover; }
 .tarija-hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(115deg, rgba(10,9,7,0.82), rgba(10,9,7,0.3)); }
 .tarija-hero h1 { color: #fff; font-weight: 500; letter-spacing: -0.035em; }
+@media (max-width: 860px) {
+  /* Que ocupe exactamente la franja visible, sin quedar por debajo de las dos
+     barras fijas: asi el apartado se lee como una pantalla entera */
+  /* Solo donde existe la barra de secciones (la inyecta main.js): el panel
+     mide pantalla menos las dos barras y el aire del salto, así entra justo
+     en la franja visible en vez de quedar a medias debajo de ellas.
+     En tarija.html y eventos.html no hay barra y el hero sigue a 100dvh. */
+  .has-secnav .tarija-hero, .has-secnav .tarija-hero--full {
+    min-height: calc(100vh - var(--nav-h-min) - var(--secnav-h) - 10px);
+    min-height: calc(100dvh - var(--nav-h-min) - var(--secnav-h) - 10px);
+    padding: 3.5rem 0;
+  }
+  /* En vertical el degradado en diagonal deja el texto sobre el cielo claro */
+  .tarija-hero::after { background: linear-gradient(180deg, rgba(10,9,7,0.5) 0%, rgba(10,9,7,0.72) 45%, rgba(10,9,7,0.86) 100%); }
+}
 
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 5.5rem); align-items: center; }
 .split--reverse .split__media { order: 2; }
@@ -884,12 +901,12 @@ details.faq-item > p { padding: 0 1.3rem 1.25rem; color: var(--muted); font-size
 /* --- Barra de secciones: permite saltar en vez de bajar (solo celular) --- */
 .secnav { display: none; }
 @media (max-width: 860px) {
+  /* Se pega a la altura de la barra ya encogida: si usara --nav-h quedaria
+     una franja transparente de 16px entre las dos y se veria pasar la pagina */
   .secnav {
-    display: block; position: sticky; top: var(--nav-h); z-index: 800;
-    background: rgba(242,235,223,0.94); backdrop-filter: blur(12px) saturate(1.05);
-    border-bottom: 1px solid var(--line);
+    display: block; position: sticky; top: var(--nav-h-min); z-index: 800;
+    background: var(--surface); border-bottom: 1px solid var(--line);
   }
-  .nav.scrolled ~ .secnav, .secnav { top: var(--nav-h); }
   .secnav__list {
     display: flex; gap: 0.4rem; overflow-x: auto; scrollbar-width: none;
     padding: 0.6rem clamp(22px, 5vw, 56px);
@@ -906,7 +923,7 @@ details.faq-item > p { padding: 0 1.3rem 1.25rem; color: var(--muted); font-size
 
 /* Al saltar desde la barra de secciones, dejar aire para el nav y la propia barra */
 [data-nav], [id] { scroll-margin-top: calc(var(--nav-h) + 8px); }
-@media (max-width: 860px) { [data-nav] { scroll-margin-top: calc(var(--nav-h) + 56px); } }
+@media (max-width: 860px) { [data-nav] { scroll-margin-top: calc(var(--nav-h-min) + var(--secnav-h) + 10px); } }
 
 
 /* --- Logotipo de marca (manual: El Cadillar Apart Hotel) --- */
