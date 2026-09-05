@@ -112,7 +112,6 @@ const page = (c, i) => {
 <header class="cabin-hero cabin-hero--${COLOR_POR_PAX[c.pax] || 'salvia'}">
   <div class="container cabin-hero__content">
     <div class="breadcrumb"><a href="../index.html">Inicio</a> · <a href="../cabanas.html">Cabañas</a> · ${c.name}</div>
-    <span class="cabin-hero__num">${String(c.dir).padStart(2, '0')}</span>
     <span class="eyebrow">${c.tag}</span>
     <h1>${c.name}</h1>
     <div class="greca"></div>
@@ -164,7 +163,7 @@ const page = (c, i) => {
     <div class="cabin-section reveal">
       <span class="eyebrow">Galería</span>
       <h2>Un vistazo</h2>
-      <div class="cabin-gallery">
+      <div class="cabin-gallery" data-fotos="${c.photos}">
     ${gallery}
       </div>
     </div>

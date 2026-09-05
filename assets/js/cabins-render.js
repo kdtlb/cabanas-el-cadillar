@@ -17,10 +17,8 @@
     el.setAttribute('data-delay', String((i % 3) + 1));
     el.dataset.pax = c.pax;
     el.dataset.camas = c.bedCount;
-    const n = String(c.dir).padStart(2, '0');
     el.innerHTML = `
       <div class="cabin-card__top">
-        <span class="cabin-card__num">${n}</span>
         <span class="cabin-card__tag">${c.tag}</span>
       </div>
       <div class="cabin-card__body">

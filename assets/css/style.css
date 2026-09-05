@@ -329,11 +329,6 @@ strong, b { font-weight: 600; color: var(--ink); }
 .cabin-card--madera .cabin-card__top { background: var(--madera); }
 .cabin-card--sol    .cabin-card__top { background: var(--sol); }
 
-.cabin-card__num {
-  position: relative; z-index: 1; display: block;
-  font-family: var(--display); font-size: 1.75rem; font-weight: 600;
-  color: var(--ink); letter-spacing: 0.02em; line-height: 1;
-}
 .cabin-card__tag {
   position: relative; z-index: 1; display: block; margin-top: 0.5rem;
   font-size: 0.58rem; font-weight: 600; letter-spacing: 0.16em;
@@ -687,12 +682,8 @@ strong, b { font-weight: 600; color: var(--ink); }
 .cabin-hero--madera { background: var(--madera); }
 .cabin-hero--sol    { background: var(--sol); }
 .cabin-hero__content { padding-top: calc(var(--nav-h) + clamp(2rem, 4vw, 3.4rem)); padding-bottom: clamp(2.4rem, 5vw, 4rem); }
-/* Sobre estas bandas solo la tinta plena llega a 4.5:1 (la madera es la más
-   ajustada, 5.4:1); cualquier opacidad menor cae por debajo del mínimo */
-.cabin-hero__num {
-  display: block; font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 600; color: var(--ink-2); line-height: 1; margin-bottom: 0.7rem;
-}
+/* Sobre estas bandas claras solo la tinta plena llega a 4.5:1 (la madera es
+   la más ajustada, 5.4:1); cualquier opacidad menor cae por debajo */
 .cabin-hero h1 { color: var(--ink); font-weight: 500; letter-spacing: -0.035em; font-size: clamp(2.4rem, 5vw, 4.2rem); margin-top: 0.5rem; }
 .cabin-hero .eyebrow { color: var(--ink); }
 .cabin-hero .greca { margin-top: 1.2rem; }
@@ -750,6 +741,57 @@ strong, b { font-weight: 600; color: var(--ink); }
 .cabin-gallery a:hover::after { opacity: 1; }
 @media (max-width: 860px) { .cabin-gallery, .gallery { column-count: 2; } }
 @media (max-width: 520px) { .cabin-gallery, .gallery { column-count: 2; column-gap: 8px; } .cabin-gallery a, .gallery a { margin-bottom: 8px; } }
+
+/* --------------------------------------------------------------------------
+   Galerías cortas: mosaico en grilla en vez de columnas.
+   Con column-count, tres fotos caían una por columna y el bloque quedaba
+   ralo, de una sola fila y con los pies desparejos. Aquí cada foto llena su
+   casilla, así que el conjunto se lee como un bloque completo.
+   -------------------------------------------------------------------------- */
+.cabin-gallery[data-fotos="1"],
+.cabin-gallery[data-fotos="2"],
+.cabin-gallery[data-fotos="3"],
+.cabin-gallery[data-fotos="4"] {
+  column-count: initial; display: grid; gap: 12px;
+}
+.cabin-gallery[data-fotos="1"] a,
+.cabin-gallery[data-fotos="2"] a,
+.cabin-gallery[data-fotos="3"] a,
+.cabin-gallery[data-fotos="4"] a { margin-bottom: 0; }
+.cabin-gallery[data-fotos="1"] img,
+.cabin-gallery[data-fotos="2"] img,
+.cabin-gallery[data-fotos="3"] img,
+.cabin-gallery[data-fotos="4"] img { width: 100%; height: 100%; object-fit: cover; }
+
+.cabin-gallery[data-fotos="1"] { grid-template-columns: 1fr; aspect-ratio: 16 / 9; }
+.cabin-gallery[data-fotos="2"] { grid-template-columns: 1fr 1fr; aspect-ratio: 32 / 11; }
+/* Una grande a la izquierda y dos apiladas a la derecha */
+.cabin-gallery[data-fotos="3"] {
+  grid-template-columns: 1.55fr 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  aspect-ratio: 3 / 2;
+}
+.cabin-gallery[data-fotos="3"] a:first-child { grid-row: 1 / span 2; }
+.cabin-gallery[data-fotos="4"] {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  aspect-ratio: 4 / 3;
+}
+
+@media (max-width: 620px) {
+  .cabin-gallery[data-fotos="1"],
+  .cabin-gallery[data-fotos="2"],
+  .cabin-gallery[data-fotos="3"],
+  .cabin-gallery[data-fotos="4"] { gap: 8px; }
+  /* En vertical la primera manda y las demás van de a dos */
+  .cabin-gallery[data-fotos="2"] { grid-template-columns: 1fr 1fr; aspect-ratio: 2 / 1; }
+  .cabin-gallery[data-fotos="3"] {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(0, 1.35fr) minmax(0, 1fr);
+    aspect-ratio: 1 / 1;
+  }
+  .cabin-gallery[data-fotos="3"] a:first-child { grid-row: 1; grid-column: 1 / span 2; }
+}
 
 /* Croquis (plano) */
 .croquis { margin-top: 1.6rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.5rem, 4vw, 3rem); }
@@ -944,7 +986,6 @@ details.faq-item > p { padding: 0 1.3rem 1.25rem; color: var(--muted); font-size
   /* Las diez cabañas en dos columnas: de 10 pantallas a la mitad */
   .cabins__grid { grid-template-columns: 1fr 1fr; gap: 0.8rem 0.7rem; }
   .cabin-card__top { padding: 0.8rem 0.9rem 0.85rem; }
-  .cabin-card__num { font-size: 1.25rem; }
   .cabin-card__tag { font-size: 0.5rem; letter-spacing: 0.12em; margin-top: 0.35rem; }
   .cabin-card__body { padding: 0.9rem 0.9rem 1rem; }
   .cabin-card__body h3 { font-size: 1.05rem; margin-bottom: 0.7rem; }
