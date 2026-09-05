@@ -331,22 +331,52 @@ strong, b { font-weight: 600; color: var(--ink); }
 .dark .cabin-card__foot .arrow-link { color: var(--paper); }
 
 /* ==========================================================================
-   ACTIVIDADES (mosaico)
+   SLIDER HORIZONTAL DE FOTOS
    ========================================================================== */
-/* Mosaico: una tarjeta alta a la izquierda y dos apiladas a la derecha */
-.activities__grid { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 252px; gap: 1.4rem; }
-.activity { position: relative; border-radius: var(--radius); overflow: hidden; color: var(--white); display: flex; align-items: flex-end; }
-.activity img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 1.1s var(--ease); }
-/* Fotos verticales cuyo motivo queda en la mitad de abajo */
-.activity--low img { object-position: center 68%; }
-/* Velo calibrado: el texto blanco queda sobre 4.5:1 incluso en el píxel más claro */
-.activity::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 22%, rgba(10,9,7,0.6) 55%, rgba(10,9,7,0.97)); }
-.activity:hover img { transform: scale(1.05); }
-.activity__body { position: relative; z-index: 1; padding: 1.8rem; }
-.activity__body h3 { color: var(--white); font-size: 1.4rem; margin-bottom: 0.25rem; font-weight: 500; }
-.activity__body p { font-size: 0.88rem; opacity: 0.88; font-weight: 300; line-height: 1.5; max-width: 40ch; }
-.activity--lg { grid-column: 1; grid-row: span 2; }
-.activity--md { grid-column: 2; grid-row: span 1; }
+.slider-wrap { position: relative; }
+/* Se derrama hasta los bordes de la pantalla: la foto cortada a la derecha
+   avisa de que hay más para deslizar */
+.slider {
+  display: flex; gap: 1rem;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  margin-inline: calc(-1 * clamp(22px, 5vw, 56px));
+  padding-inline: clamp(22px, 5vw, 56px);
+}
+.slider::-webkit-scrollbar { display: none; }
+.slider:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: var(--radius); }
+
+.slide {
+  position: relative; flex: 0 0 300px; scroll-snap-align: start;
+  aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden;
+  color: var(--white); display: block;
+}
+.slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 32%, rgba(10,9,7,0.62) 64%, rgba(10,9,7,0.95)); }
+.slide:hover img { transform: scale(1.06); }
+.slide__cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 1.3rem 1.35rem; }
+.slide__cap b { display: block; font-family: var(--display); font-size: 1.12rem; font-weight: 500; letter-spacing: -0.01em; }
+.slide__cap span { display: block; margin-top: 0.22rem; font-size: 0.82rem; font-weight: 300; opacity: 0.86; line-height: 1.45; }
+
+/* Flechas: solo en escritorio, donde no hay gesto de deslizar */
+.slider__nav {
+  position: absolute; top: calc(50% - 23px); z-index: 2;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--paper); color: var(--ink-2); border: 1px solid var(--line-2);
+  display: grid; place-items: center;
+  box-shadow: 0 6px 20px rgba(31,23,17,0.18);
+  transition: opacity var(--transition), background var(--transition), transform var(--transition);
+}
+.slider__nav:hover { background: var(--tint); transform: scale(1.06); }
+.slider__nav .ico { width: 17px; height: 17px; }
+.slider__nav--prev { left: -14px; }
+.slider__nav--next { right: -14px; }
+.slider__nav[disabled] { opacity: 0; pointer-events: none; }
+@media (max-width: 860px) {
+  .slider__nav { display: none; }
+  .slide { flex-basis: 74%; }
+}
+@media (max-width: 560px) { .slide { flex-basis: 82%; } }
 
 /* ==========================================================================
    ESPACIOS COMUNES — bento
@@ -752,10 +782,6 @@ strong, b { font-weight: 600; color: var(--ink); }
   .cabins__grid, .exp-grid, .testi-grid { grid-template-columns: repeat(2, 1fr); }
   .cabin-layout { grid-template-columns: 1fr; }
   .booking-card { position: static; }
-  /* Una sola columna: la altura la marca la proporción de cada tarjeta */
-  .activities__grid { grid-template-columns: 1fr; grid-auto-rows: auto; gap: 1rem; }
-  .activity { aspect-ratio: 16 / 10; }
-  .activity--lg, .activity--md { grid-column: 1; grid-row: auto; }
   .spaces { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 240px; }
   .space--pool { grid-column: span 2; grid-row: span 1; }
   .space--quincho, .space--salon { grid-column: span 1; }
@@ -879,11 +905,10 @@ details.faq-item > p { padding: 0 1.3rem 1.25rem; color: var(--muted); font-size
   .features { margin-top: 2.6rem; }
   .steps, .trust { margin-top: 2rem; }
   .trust__item { padding: 1.1rem 0.6rem; }
-  .activities__grid { gap: 0.8rem; }
-  .activity { aspect-ratio: 4 / 3; }
-  .activity__body { padding: 1.1rem 1.2rem 1.25rem; }
-  .activity__body h3 { font-size: 1.18rem; margin-bottom: 0.2rem; }
-  .activity__body p { font-size: 0.85rem; line-height: 1.45; }
+  .slider { gap: 0.7rem; }
+  .slide__cap { padding: 1rem 1.05rem 1.1rem; }
+  .slide__cap b { font-size: 1rem; }
+  .slide__cap span { font-size: 0.78rem; }
   .exp-grid { gap: 1rem; }
 }
 

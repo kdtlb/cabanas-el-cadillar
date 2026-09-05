@@ -222,10 +222,40 @@
     });
   })();
 
+  /* ---- Slider horizontal: flechas en escritorio ---- */
+  document.querySelectorAll('.slider-wrap').forEach(wrap => {
+    const via = wrap.querySelector('.slider');
+    const prev = wrap.querySelector('.slider__nav--prev');
+    const next = wrap.querySelector('.slider__nav--next');
+    if (!via || !prev || !next) return;
+
+    // Un salto = una diapositiva más su separación
+    const paso = () => {
+      const s = via.querySelector('.slide');
+      if (!s) return via.clientWidth;
+      return s.getBoundingClientRect().width + parseFloat(getComputedStyle(via).columnGap || 0);
+    };
+    const marcar = () => {
+      const max = via.scrollWidth - via.clientWidth;
+      prev.disabled = via.scrollLeft < 4;
+      next.disabled = via.scrollLeft > max - 4;
+    };
+    prev.addEventListener('click', () => via.scrollBy({ left: -paso(), behavior: 'smooth' }));
+    next.addEventListener('click', () => via.scrollBy({ left: paso(), behavior: 'smooth' }));
+    via.addEventListener('scroll', marcar, { passive: true });
+    window.addEventListener('resize', marcar);
+    // Flechas del teclado cuando el carril tiene el foco
+    via.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); via.scrollBy({ left: paso(), behavior: 'smooth' }); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); via.scrollBy({ left: -paso(), behavior: 'smooth' }); }
+    });
+    marcar();
+  });
+
   /* ---- Puntos indicadores para los carruseles de celular ---- */
   (function () {
     const esMovil = window.matchMedia('(max-width: 860px)');
-    document.querySelectorAll('.exp-grid, .testi-grid').forEach(car => {
+    document.querySelectorAll('.exp-grid, .testi-grid, .slider').forEach(car => {
       const items = car.children.length;
       if (items < 2) return;
       const dots = document.createElement('div');
@@ -234,8 +264,14 @@
       car.parentNode.insertBefore(dots, car.nextSibling);
       const marcar = () => {
         if (!esMovil.matches) return;
-        const i = Math.round(car.scrollLeft / (car.scrollWidth / items));
-        Array.prototype.forEach.call(dots.children, (d, n) => d.classList.toggle('on', n === Math.min(i, items - 1)));
+        // Se mide contra el ancho real de una tarjeta: dividir el scrollWidth
+        // entre el número de tarjetas falla cuando el carril lleva padding
+        const primera = car.children[0];
+        const paso = primera
+          ? primera.getBoundingClientRect().width + parseFloat(getComputedStyle(car).columnGap || 0)
+          : car.clientWidth;
+        const i = Math.round(car.scrollLeft / paso);
+        Array.prototype.forEach.call(dots.children, (d, n) => d.classList.toggle('on', n === Math.max(0, Math.min(i, items - 1))));
       };
       car.addEventListener('scroll', marcar, { passive: true });
       marcar();
@@ -286,7 +322,7 @@
 
   /* ---- Visor de fotos (galerías) ---- */
   (function () {
-    const links = Array.prototype.slice.call(document.querySelectorAll('.gallery a, .cabin-gallery a'));
+    const links = Array.prototype.slice.call(document.querySelectorAll('.gallery a, .cabin-gallery a, .slider a'));
     if (!links.length) return;
 
     const box = document.createElement('div');
