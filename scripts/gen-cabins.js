@@ -47,6 +47,10 @@ const croquis = (c) => {
     `</svg>`;
 };
 
+/* Mismo código de color que el listado: el encabezado de la ficha repite
+   el color del grupo al que pertenece la cabaña */
+const COLOR_POR_PAX = { 2: 'salvia', 4: 'cielo', 5: 'madera' };
+
 const page = (c, i) => {
   const prev = CABINS[(i - 1 + CABINS.length) % CABINS.length];
   const next = CABINS[(i + 1) % CABINS.length];
@@ -104,14 +108,14 @@ const page = (c, i) => {
   <a href="../reservas.html" class="btn btn--gold">Reservar</a>
 </div>
 
-<!-- HERO -->
-<header class="cabin-hero">
-  <div class="cabin-hero__bg"><img src="../${c.img()}" alt="${c.name}"></div>
+<!-- ENCABEZADO (sin foto: las fotos van todas a la galería) -->
+<header class="cabin-hero cabin-hero--${COLOR_POR_PAX[c.pax] || 'salvia'}">
   <div class="container cabin-hero__content">
     <div class="breadcrumb"><a href="../index.html">Inicio</a> · <a href="../cabanas.html">Cabañas</a> · ${c.name}</div>
-    <span class="eyebrow eyebrow--light">${c.tag}</span>
+    <span class="cabin-hero__num">${String(c.dir).padStart(2, '0')}</span>
+    <span class="eyebrow">${c.tag}</span>
     <h1>${c.name}</h1>
-    <div class="greca greca--light"></div>
+    <div class="greca"></div>
     <div class="cabin-hero__meta">
       <span><span class="ico" data-icon="users"></span> ${c.capacity}</span>
       <span><span class="ico" data-icon="bed"></span> ${c.beds}</span>

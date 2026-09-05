@@ -679,17 +679,29 @@ strong, b { font-weight: 600; color: var(--ink); }
 /* ==========================================================================
    PÁGINA DE CABAÑA
    ========================================================================== */
-.cabin-hero { position: relative; height: 82vh; min-height: 560px; display: flex; align-items: flex-end; color: var(--white); overflow: hidden; }
-.cabin-hero__bg { position: absolute; inset: 0; z-index: -2; }
-.cabin-hero__bg img { width: 100%; height: 100%; object-fit: cover; }
-.cabin-hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,9,7,0.2), rgba(10,9,7,0.82)); }
-.cabin-hero__content { padding-bottom: 4rem; }
-.cabin-hero h1 { color: #fff; font-weight: 500; letter-spacing: -0.035em; font-size: clamp(2.6rem, 5.5vw, 5rem); }
-.cabin-hero__meta { display: flex; gap: 1.6rem; margin-top: 1.2rem; flex-wrap: wrap; font-size: 0.84rem; letter-spacing: 0.02em; color: rgba(255,255,255,0.9); }
+/* Encabezado de ficha: sin foto, una banda del color del grupo. Las fotos
+   de la cabaña viven todas en la galería. */
+.cabin-hero { position: relative; }
+.cabin-hero--salvia { background: var(--salvia); }
+.cabin-hero--cielo  { background: var(--cielo); }
+.cabin-hero--madera { background: var(--madera); }
+.cabin-hero--sol    { background: var(--sol); }
+.cabin-hero__content { padding-top: calc(var(--nav-h) + clamp(2rem, 4vw, 3.4rem)); padding-bottom: clamp(2.4rem, 5vw, 4rem); }
+/* Sobre estas bandas solo la tinta plena llega a 4.5:1 (la madera es la más
+   ajustada, 5.4:1); cualquier opacidad menor cae por debajo del mínimo */
+.cabin-hero__num {
+  display: block; font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 600; color: var(--ink-2); line-height: 1; margin-bottom: 0.7rem;
+}
+.cabin-hero h1 { color: var(--ink); font-weight: 500; letter-spacing: -0.035em; font-size: clamp(2.4rem, 5vw, 4.2rem); margin-top: 0.5rem; }
+.cabin-hero .eyebrow { color: var(--ink); }
+.cabin-hero .greca { margin-top: 1.2rem; }
+.cabin-hero__meta { display: flex; gap: 1.6rem; margin-top: 1.4rem; flex-wrap: wrap; font-size: 0.84rem; letter-spacing: 0.02em; color: var(--ink); }
 .cabin-hero__meta span { display: flex; align-items: center; gap: 0.5rem; }
-.cabin-hero__meta .ico { width: 16px; height: 16px; color: rgba(255,255,255,0.7); }
-.breadcrumb { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(255,255,255,0.72); margin-bottom: 1.2rem; }
-.breadcrumb a:hover { color: #fff; }
+.cabin-hero__meta .ico { width: 16px; height: 16px; color: rgba(74, 55, 43, 0.8); }
+.breadcrumb { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink); margin-bottom: 1.2rem; }
+.breadcrumb a { color: inherit; }
+.breadcrumb a:hover { color: var(--ink); }
 
 /* Página de cabaña — una sola columna (usa el ancho del contenedor) */
 .cabin-content { max-width: none; margin: 0 auto; }
