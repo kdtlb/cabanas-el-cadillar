@@ -139,6 +139,135 @@
     });
   });
 
+  /* ---- Galerías largas: se muestran unas pocas y el resto bajo demanda ---- */
+  (function () {
+    const MAX = window.matchMedia('(max-width: 640px)').matches ? 4 : 6;
+    document.querySelectorAll('.gallery, .cabin-gallery').forEach(g => {
+      const items = Array.prototype.slice.call(g.querySelectorAll('a'));
+      if (items.length <= MAX + 1) return;
+      const ocultas = items.slice(MAX);
+      ocultas.forEach(a => a.classList.add('is-cut'));
+
+      const wrap = document.createElement('div');
+      wrap.className = 'gallery-more';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'btn btn--outline';
+      btn.textContent = 'Ver las ' + items.length + ' fotos';
+      wrap.appendChild(btn);
+      g.parentNode.insertBefore(wrap, g.nextSibling);
+
+      btn.addEventListener('click', () => {
+        const abierta = !ocultas[0].classList.contains('is-cut');
+        ocultas.forEach(a => a.classList.toggle('is-cut', abierta));
+        btn.textContent = abierta ? 'Ver las ' + items.length + ' fotos' : 'Ver menos';
+        if (abierta) g.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  })();
+
+  /* ---- Barra de secciones: saltar directo en vez de bajar (celular) ---- */
+  (function () {
+    const secs = Array.prototype.slice.call(document.querySelectorAll('[data-nav][id]'));
+    if (secs.length < 3) return;
+
+    const bar = document.createElement('nav');
+    bar.className = 'secnav';
+    bar.setAttribute('aria-label', 'Secciones de la página');
+    const list = document.createElement('div');
+    list.className = 'secnav__list';
+    secs.forEach(s => {
+      const a = document.createElement('a');
+      a.href = '#' + s.id;
+      a.textContent = s.getAttribute('data-nav');
+      list.appendChild(a);
+    });
+    bar.appendChild(list);
+    const hero = document.querySelector('.hero, .page-header, .tarija-hero');
+    if (hero && hero.parentNode) hero.parentNode.insertBefore(bar, hero.nextSibling);
+    else document.body.insertBefore(bar, document.body.firstChild);
+
+    const links = Array.prototype.slice.call(list.children);
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const i = secs.indexOf(e.target);
+        links.forEach((l, n) => l.classList.toggle('on', n === i));
+        const act = links[i];
+        if (act) list.scrollTo({ left: act.offsetLeft - 60, behavior: 'smooth' });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secs.forEach(s => io.observe(s));
+  })();
+
+  /* ---- Detalles colapsados en celular (listas largas dentro de bloques) ---- */
+  (function () {
+    const movil = window.matchMedia('(max-width: 640px)');
+    document.querySelectorAll('.space-feature__list, .split__list').forEach(lista => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'collapse-btn';
+      btn.textContent = 'Ver detalles';
+      lista.parentNode.insertBefore(btn, lista);
+
+      const aplicar = () => lista.classList.toggle('is-collapsed', movil.matches && !btn.classList.contains('open'));
+      btn.addEventListener('click', () => { btn.classList.toggle('open'); btn.textContent = btn.classList.contains('open') ? 'Ocultar detalles' : 'Ver detalles'; aplicar(); });
+      movil.addEventListener('change', aplicar);
+      aplicar();
+    });
+  })();
+
+  /* ---- Puntos indicadores para los carruseles de celular ---- */
+  (function () {
+    const esMovil = window.matchMedia('(max-width: 860px)');
+    document.querySelectorAll('.exp-grid, .testi-grid').forEach(car => {
+      const items = car.children.length;
+      if (items < 2) return;
+      const dots = document.createElement('div');
+      dots.className = 'swipe-dots';
+      for (let i = 0; i < items; i++) dots.appendChild(document.createElement('span'));
+      car.parentNode.insertBefore(dots, car.nextSibling);
+      const marcar = () => {
+        if (!esMovil.matches) return;
+        const i = Math.round(car.scrollLeft / (car.scrollWidth / items));
+        Array.prototype.forEach.call(dots.children, (d, n) => d.classList.toggle('on', n === Math.min(i, items - 1)));
+      };
+      car.addEventListener('scroll', marcar, { passive: true });
+      marcar();
+    });
+  })();
+
+  /* ---- Progreso de lectura y volver arriba ---- */
+  (function () {
+    const bar = document.createElement('div');
+    bar.className = 'progress';
+    document.body.appendChild(bar);
+
+    const top = document.createElement('button');
+    top.className = 'to-top';
+    top.type = 'button';
+    top.setAttribute('aria-label', 'Volver arriba');
+    top.innerHTML = '<span class="ico" data-icon="arrow"></span>';
+    document.body.appendChild(top);
+    if (window.applyIcons) window.applyIcons(top);
+    top.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    let tick = false;
+    function onScroll() {
+      if (tick) return;
+      tick = true;
+      requestAnimationFrame(() => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        const y = window.scrollY;
+        bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+        top.classList.toggle('show', y > window.innerHeight * 1.5);
+        tick = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
   /* ---- Visor de fotos (galerías) ---- */
   (function () {
     const links = Array.prototype.slice.call(document.querySelectorAll('.gallery a, .cabin-gallery a'));

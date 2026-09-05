@@ -602,7 +602,7 @@ strong, b { font-weight: 600; color: var(--ink); }
 .cabin-gallery a::after { content: ''; position: absolute; inset: 0; background: rgba(23,22,18,0.16); opacity: 0; transition: opacity 0.35s var(--ease); }
 .cabin-gallery a:hover::after { opacity: 1; }
 @media (max-width: 860px) { .cabin-gallery, .gallery { column-count: 2; } }
-@media (max-width: 520px) { .cabin-gallery, .gallery { column-count: 1; column-gap: 10px; } .cabin-gallery a, .gallery a { margin-bottom: 10px; } }
+@media (max-width: 520px) { .cabin-gallery, .gallery { column-count: 2; column-gap: 8px; } .cabin-gallery a, .gallery a { margin-bottom: 8px; } }
 
 /* Croquis (plano) */
 .croquis { margin-top: 1.6rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.5rem, 4vw, 3rem); }
@@ -734,3 +734,159 @@ strong, b { font-weight: 600; color: var(--ink); }
   .hero__actions .btn { justify-content: center; }
   .hero__scroll { display: none; }
 }
+
+/* ==========================================================================
+   COMPACTACIÓN EN CELULAR E INTERACCIÓN
+   La página era muy larga en móvil (16 pantallas en Inicio y Eventos).
+   ========================================================================== */
+
+/* --- Barra de progreso de lectura --- */
+.progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 1200; background: var(--accent); transition: width 0.1s linear; pointer-events: none; }
+
+/* --- Botón volver arriba --- */
+.to-top {
+  position: fixed; right: 22px; bottom: 88px; z-index: 900;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--ink); color: var(--paper);
+  display: grid; place-items: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+}
+.to-top.show { opacity: 1; visibility: visible; transform: none; }
+.to-top .ico { width: 19px; height: 19px; transform: rotate(-90deg); }
+@media (max-width: 560px) { .to-top { right: 16px; bottom: 78px; width: 42px; height: 42px; } }
+
+/* --- Galerías recortadas: se muestran unas pocas y el resto bajo demanda --- */
+.gallery a.is-cut, .cabin-gallery a.is-cut { display: none; }
+.gallery-more { display: flex; justify-content: center; margin-top: 0.4rem; }
+
+/* --- Acordeón (preguntas frecuentes y bloques colapsables) --- */
+details.faq-item { padding: 0; overflow: hidden; }
+details.faq-item > summary {
+  list-style: none; cursor: pointer; padding: 1.15rem 1.3rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  font-family: var(--display); font-size: 1.02rem; font-weight: 500; color: var(--ink);
+}
+details.faq-item > summary::-webkit-details-marker { display: none; }
+details.faq-item > summary::after {
+  content: '+'; font-family: var(--body); font-size: 1.3rem; font-weight: 300;
+  color: var(--muted); flex: none; transition: transform var(--transition);
+}
+details.faq-item[open] > summary::after { transform: rotate(45deg); }
+details.faq-item > summary:hover { background: rgba(74,56,34,0.04); }
+details.faq-item > p { padding: 0 1.3rem 1.25rem; color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+.faq-grid { display: grid; gap: 0.7rem; }
+@media (min-width: 861px) { .faq-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+/* --- Datos destacados en tarjeta de cabaña (chips legibles) --- */
+.cabin-card__meta span {
+  background: rgba(255,255,255,0.16); backdrop-filter: blur(3px);
+  padding: 0.18rem 0.5rem; border-radius: 100px; line-height: 1.5;
+}
+.cabin-card__meta span:not(:last-child)::after { content: none; }
+
+@media (max-width: 860px) {
+  /* Testimonios y espacios: deslizables en vez de apilados */
+  .testi-grid {
+    display: flex; gap: 0.9rem; overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    margin-inline: calc(-1 * clamp(22px, 5vw, 56px)); padding: 0.2rem clamp(22px, 5vw, 56px) 0.9rem;
+  }
+  .testi-grid::-webkit-scrollbar { display: none; }
+  .testi { flex: 0 0 84%; scroll-snap-align: center; }
+}
+
+@media (max-width: 640px) {
+  /* Menos aire entre secciones: era el mayor consumidor de scroll */
+  .section { padding: 3.6rem 0; }
+  .section--tight { padding: 2.8rem 0; }
+
+  /* Las diez cabañas en dos columnas: de 10 pantallas a la mitad */
+  .cabins__grid { grid-template-columns: 1fr 1fr; gap: 1rem 0.7rem; }
+  .cabin-card__media { aspect-ratio: 3 / 4; }
+  .cabin-card__overlay { padding: 0.85rem 0.8rem; }
+  .cabin-card__overlay h3 { font-size: 0.98rem; margin-bottom: 0.3rem; }
+  .cabin-card__meta { font-size: 0.56rem; gap: 0.25rem; }
+  .cabin-card__meta span:nth-child(n+2) { display: none; }
+  .cabin-card__meta span { font-size: 0.62rem; padding: 0.2rem 0.55rem; }
+  .cabin-card__tag { display: none; }
+  .cabin-card__foot { display: none; }
+
+  /* Espacios: imagen más baja y texto más ajustado */
+  .space-feature { gap: 1.4rem; }
+  .space-feature__media img { height: 210px; }
+  .space-feature__body h3 { font-size: 1.45rem; margin: 0.5rem 0 0.6rem; }
+  .space-feature__body > p { font-size: 0.95rem; }
+  .space-feature__list { margin-top: 1rem; gap: 0.5rem; }
+
+  /* Bloques de datos más compactos */
+  .features { margin-top: 2.6rem; }
+  .steps, .trust { margin-top: 2rem; }
+  .trust__item { padding: 1.1rem 0.6rem; }
+  .activities__grid { grid-auto-rows: 190px; gap: 0.7rem; }
+  .exp-grid { gap: 1rem; }
+}
+
+/* --- Carruseles en celular: tarjetas que se deslizan en vez de apilarse --- */
+@media (max-width: 860px) {
+  .exp-grid, .exp-grid--2 {
+    display: flex; gap: 0.9rem; overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    margin-inline: calc(-1 * clamp(22px, 5vw, 56px));
+    padding: 0.2rem clamp(22px, 5vw, 56px) 0.9rem;
+  }
+  .exp-grid::-webkit-scrollbar, .exp-grid--2::-webkit-scrollbar { display: none; }
+  .exp-grid > *, .exp-grid--2 > * { flex: 0 0 82%; scroll-snap-align: center; }
+  .exp-card__media { aspect-ratio: 4 / 3; }
+}
+
+/* Indicador de carrusel: puntos que muestran en qué tarjeta va */
+.swipe-dots { display: none; justify-content: center; gap: 6px; margin-top: 0.2rem; }
+.swipe-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--line-2); transition: var(--transition); }
+.swipe-dots span.on { background: var(--accent); transform: scale(1.35); }
+@media (max-width: 860px) { .swipe-dots { display: flex; } }
+
+/* --- Bloques colapsables en celular ("Ver detalles") --- */
+.collapse-btn {
+  display: none; align-items: center; gap: 0.45rem; margin-top: 0.9rem;
+  font-family: var(--body); font-size: 0.68rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+}
+.collapse-btn::after { content: '+'; font-size: 1.05rem; font-weight: 300; line-height: 1; transition: transform var(--transition); }
+.collapse-btn.open::after { transform: rotate(45deg); }
+@media (max-width: 640px) {
+  .collapse-btn { display: inline-flex; }
+  .is-collapsed { display: none !important; }
+  /* imágenes de bloque más bajas: liberan mucho scroll */
+  .intro__media img { height: 250px !important; }
+  .split__media img { height: 230px; }
+  .intro__badge { padding: 1rem 1.1rem; }
+}
+
+/* --- Barra de secciones: permite saltar en vez de bajar (solo celular) --- */
+.secnav { display: none; }
+@media (max-width: 860px) {
+  .secnav {
+    display: block; position: sticky; top: var(--nav-h); z-index: 800;
+    background: rgba(242,235,223,0.94); backdrop-filter: blur(12px) saturate(1.05);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav.scrolled ~ .secnav, .secnav { top: var(--nav-h); }
+  .secnav__list {
+    display: flex; gap: 0.4rem; overflow-x: auto; scrollbar-width: none;
+    padding: 0.6rem clamp(22px, 5vw, 56px);
+  }
+  .secnav__list::-webkit-scrollbar { display: none; }
+  .secnav a {
+    flex: none; padding: 0.42rem 0.85rem; border-radius: 100px;
+    border: 1px solid var(--line-2); color: var(--ink-2);
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; white-space: nowrap; transition: var(--transition);
+  }
+  .secnav a.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+}
+
+/* Al saltar desde la barra de secciones, dejar aire para el nav y la propia barra */
+[data-nav], [id] { scroll-margin-top: calc(var(--nav-h) + 8px); }
+@media (max-width: 860px) { [data-nav] { scroll-margin-top: calc(var(--nav-h) + 56px); } }
