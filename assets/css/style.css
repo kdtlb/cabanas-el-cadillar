@@ -355,7 +355,8 @@ strong, b { font-weight: 600; color: var(--ink); }
 .slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 32%, rgba(10,9,7,0.62) 64%, rgba(10,9,7,0.95)); }
 .slide:hover img { transform: scale(1.06); }
 .slide__cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 1.3rem 1.35rem; }
-.slide__cap b { display: block; font-family: var(--display); font-size: 1.12rem; font-weight: 500; letter-spacing: -0.01em; }
+/* color explícito: la regla general de <b> lo pintaba del marrón oscuro */
+.slide__cap b { display: block; color: var(--white); font-family: var(--display); font-size: 1.12rem; font-weight: 500; letter-spacing: -0.01em; }
 .slide__cap span { display: block; margin-top: 0.22rem; font-size: 0.82rem; font-weight: 300; opacity: 0.86; line-height: 1.45; }
 
 /* Flechas: solo en escritorio, donde no hay gesto de deslizar */
@@ -420,7 +421,10 @@ strong, b { font-weight: 600; color: var(--ink); }
 .tarija-hero__bg { position: absolute; inset: 0; z-index: -2; }
 .tarija-hero__bg img { width: 100%; height: 100%; object-fit: cover; }
 .tarija-hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(115deg, rgba(10,9,7,0.82), rgba(10,9,7,0.3)); }
-.tarija-hero h1 { color: #fff; font-weight: 500; letter-spacing: -0.035em; }
+/* Cualquier titular del panel, no solo el h1: el índice usa h2 y heredaba
+   el marrón oscuro de la regla general de titulares */
+.tarija-hero :is(h1, h2, h3), .tarija-hero strong, .tarija-hero b { color: #fff; }
+.tarija-hero :is(h1, h2) { font-weight: 500; letter-spacing: -0.035em; }
 @media (max-width: 860px) {
   /* Que ocupe exactamente la franja visible, sin quedar por debajo de las dos
      barras fijas: asi el apartado se lee como una pantalla entera */
@@ -601,7 +605,7 @@ strong, b { font-weight: 600; color: var(--ink); }
    ========================================================================== */
 .footer { background: var(--dark); color: var(--on-dark); padding: 6rem 0 2.2rem; }
 .footer__grid { display: grid; grid-template-columns: 1.7fr 1fr 1.4fr; gap: 3rem; }
-.footer h4 { font-family: var(--body); color: var(--on-dark-2); font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 1.5rem; font-weight: 600; }
+.footer h4 { font-family: var(--body); color: rgba(255, 255, 255, 0.62); font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 1.5rem; font-weight: 600; }
 .footer__brand .nav__name { color: var(--paper); font-size: 1.5rem; }
 .footer__brand .nav__logo { border-color: rgba(255,255,255,0.3); }
 .footer__brand p { margin-top: 1.4rem; font-size: 0.9rem; max-width: 36ch; line-height: 1.75; }
@@ -609,7 +613,7 @@ strong, b { font-weight: 600; color: var(--ink); }
 .footer ul a { font-size: 0.88rem; transition: var(--transition); }
 .footer ul a:hover { color: var(--paper); }
 .footer__contact li { font-size: 0.88rem; margin-bottom: 0.9rem; line-height: 1.6; }
-.footer__contact .label { display: block; font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--on-dark-2); margin-bottom: 0.25rem; }
+.footer__contact .label { display: block; font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(255, 255, 255, 0.62); margin-bottom: 0.25rem; }
 .footer__social { display: flex; gap: 0.7rem; margin-top: 1.6rem; }
 .footer__social a { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.18); border-radius: 2px; display: grid; place-items: center; transition: var(--transition); color: var(--on-dark); }
 .footer__social a .ico { width: 17px; height: 17px; }
@@ -937,6 +941,8 @@ details.faq-item > p { padding: 0 1.3rem 1.25rem; color: var(--muted); font-size
   font-family: var(--body); font-size: 0.68rem; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
 }
+/* En los bloques oscuros el marrón del acento quedaba invisible (1.3:1) */
+.dark .collapse-btn { color: rgba(255, 255, 255, 0.88); }
 .collapse-btn::after { content: '+'; font-size: 1.05rem; font-weight: 300; line-height: 1; transition: transform var(--transition); }
 .collapse-btn.open::after { transform: rotate(45deg); }
 @media (max-width: 640px) {
