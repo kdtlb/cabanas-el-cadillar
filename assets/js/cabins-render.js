@@ -2,31 +2,60 @@
 (function () {
   'use strict';
 
+  /* Ruta al isotipo: las fichas de cabaña viven en /cabanas/ */
+  function base() {
+    return /\/cabanas\//.test(location.pathname) ? '../' : '';
+  }
+
+  /* El color de la banda dice la capacidad, no es decoración al azar:
+     mismo color = mismo grupo de personas. */
+  const COLOR_POR_PAX = { 2: 'salvia', 4: 'cielo', 5: 'madera' };
+
   function card(c, i) {
     const el = document.createElement('article');
-    el.className = 'cabin-card reveal';
+    el.className = 'cabin-card cabin-card--' + (COLOR_POR_PAX[c.pax] || 'salvia') + ' reveal';
     el.setAttribute('data-delay', String((i % 3) + 1));
     el.dataset.pax = c.pax;
     el.dataset.camas = c.bedCount;
-    const n = String(i + 1).padStart(2, '0');
+    const n = String(c.dir).padStart(2, '0');
     el.innerHTML = `
-      <a href="${c.url}" class="cabin-card__media">
-        <img src="${c.img()}" alt="${c.name}" loading="lazy">
+      <div class="cabin-card__top">
         <span class="cabin-card__num">${n}</span>
         <span class="cabin-card__tag">${c.tag}</span>
-        <div class="cabin-card__overlay">
-          <h3>${c.name}</h3>
-          <div class="cabin-card__meta">
-            <span>${c.capacity}</span>
-            <span>${c.beds}</span>
-            <span>${c.spec3}</span>
-          </div>
-        </div>
-      </a>
-      <div class="cabin-card__foot">
-        <a href="${c.url}" class="arrow-link">Ver la cabaña <span class="ico" data-icon="arrow"></span></a>
+        <img class="cabin-card__seal" src="${base()}assets/img/marca/sello.png" alt="" aria-hidden="true" width="360" height="360" loading="lazy">
+      </div>
+      <div class="cabin-card__body">
+        <h3><a href="${c.url}">${c.name}</a></h3>
+        <dl class="cabin-card__specs">
+          <div><dt>Personas</dt><dd>${c.pax}</dd></div>
+          <div><dt>Camas</dt><dd>${c.bedCount}</dd></div>
+          <div><dt>Baños</dt><dd>${c.baths}</dd></div>
+        </dl>
+        <p class="cabin-card__det">${c.beds}</p>
+        <span class="cabin-card__cta">Ver la cabaña <span class="ico" data-icon="arrow"></span></span>
       </div>`;
     return el;
+  }
+
+  /* Nombres de los grupos por capacidad */
+  const EN_LETRAS = { 2: 'dos', 3: 'tres', 4: 'cuatro', 5: 'cinco', 6: 'seis' };
+
+  function grupo(pax, cabanas) {
+    const sec = document.createElement('section');
+    sec.className = 'cabin-group';
+    sec.dataset.pax = pax;
+    const cuenta = cabanas.length === 1 ? '1 cabaña' : cabanas.length + ' cabañas';
+    const head = document.createElement('div');
+    head.className = 'cabin-group__head reveal';
+    head.innerHTML =
+      '<h3>Para ' + (EN_LETRAS[pax] || pax) + ' personas</h3>' +
+      '<span class="cabin-group__count">' + cuenta + '</span>';
+    const grid = document.createElement('div');
+    grid.className = 'cabins__grid';
+    cabanas.forEach((c, i) => grid.appendChild(card(c, i)));
+    sec.appendChild(head);
+    sec.appendChild(grid);
+    return sec;
   }
 
   function observe(grid) {
@@ -40,12 +69,27 @@
     }
   }
 
+  /* Adelanto suelto (portada): sin agrupar */
   window.renderCabinCards = function (grid, limit) {
     if (!window.CABINS || !grid) return;
     const list = limit ? window.CABINS.slice(0, limit) : window.CABINS;
     list.forEach((c, i) => grid.appendChild(card(c, i)));
     if (window.applyIcons) window.applyIcons(grid);
     observe(grid);
+  };
+
+  /* Listado completo agrupado por capacidad, de menor a mayor */
+  window.renderCabinGroups = function (cont) {
+    if (!window.CABINS || !cont) return;
+    const porPax = new Map();
+    window.CABINS.forEach(c => {
+      if (!porPax.has(c.pax)) porPax.set(c.pax, []);
+      porPax.get(c.pax).push(c);
+    });
+    Array.from(porPax.keys()).sort((a, b) => a - b)
+      .forEach(pax => cont.appendChild(grupo(pax, porPax.get(pax))));
+    if (window.applyIcons) window.applyIcons(cont);
+    observe(cont);
   };
 
   /* Tabla comparativa (cabanas.html) */
@@ -72,14 +116,15 @@
      cuatro también quiere ver las de cinco. */
   window.initCabinFilter = function () {
     const form = document.getElementById('filtros');
-    const grid = document.getElementById('cabins-grid');
-    if (!form || !grid) return;
+    const cont = document.getElementById('cabins-grouped') || document.getElementById('cabins-grid');
+    if (!form || !cont) return;
 
     const cuenta = document.getElementById('filtros-cuenta');
     const vacio = document.getElementById('filtros-vacio');
     const limpiar = document.getElementById('filtros-limpiar');
     const filas = document.querySelectorAll('#tabla-cabanas tbody tr');
-    const tarjetas = grid.querySelectorAll('.cabin-card');
+    const tarjetas = cont.querySelectorAll('.cabin-card');
+    const grupos = cont.querySelectorAll('.cabin-group');
     const estado = { pax: 0, camas: 0 };
 
     function aplicar() {
@@ -88,6 +133,12 @@
         const ok = +el.dataset.pax >= estado.pax && +el.dataset.camas >= estado.camas;
         el.hidden = !ok;
         if (ok) n++;
+      });
+      // Un grupo sin ninguna cabaña visible se esconde entero, para que no
+      // quede el título "Para dos personas" encabezando un hueco
+      grupos.forEach(g => {
+        g.hidden = !Array.prototype.some.call(
+          g.querySelectorAll('.cabin-card'), el => !el.hidden);
       });
       filas.forEach(tr => {
         tr.hidden = !(+tr.dataset.pax >= estado.pax && +tr.dataset.camas >= estado.camas);

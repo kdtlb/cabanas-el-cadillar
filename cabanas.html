@@ -81,7 +81,7 @@
       </div>
     </form>
 
-    <div class="cabins__grid" id="cabins-grid"></div>
+    <div class="cabin-groups" id="cabins-grouped"></div>
 
     <p class="filtros__vacio" id="filtros-vacio" hidden>
       Ninguna cabaña cumple con eso. Pruebe con menos personas o escríbanos y buscamos la combinación:
@@ -156,7 +156,7 @@
 <script src="assets/js/cabins-render.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
-  renderCabinCards(document.getElementById('cabins-grid'));
+  renderCabinGroups(document.getElementById('cabins-grouped'));
   renderCabinTable(document.querySelector('#tabla-cabanas tbody'));
   initCabinFilter();
 </script>
