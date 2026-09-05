@@ -995,3 +995,84 @@ details.faq-item > p { padding: 0 1.3rem 1.25rem; color: var(--muted); font-size
   .nav__logo-img, .nav.scrolled .nav__logo-img, .nav--solid .nav__logo-img { height: 40px; }
   .footer__logo { width: 108px; }
 }
+
+/* ==========================================================================
+   FILTRO Y TABLA COMPARATIVA DE CABAÑAS
+   ========================================================================== */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Sin esto el filtro no oculta nada: cualquier regla que fije display
+   (como .cabin-card { display: flex }) le gana al atributo hidden */
+[hidden] { display: none !important; }
+
+.filtros {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem 2.4rem;
+  padding: 1.3rem clamp(1.1rem, 2.5vw, 1.8rem);
+  margin-bottom: 2.6rem;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.filtros__grupo { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; }
+.filtros__label {
+  font-family: var(--body); font-size: 0.64rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted);
+}
+.filtros__ops { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.chip {
+  padding: 0.46rem 0.95rem; border-radius: 100px;
+  border: 1px solid var(--line-2); background: transparent; color: var(--ink-2);
+  font-family: var(--body); font-size: 0.74rem; font-weight: 500;
+  transition: var(--transition); white-space: nowrap;
+}
+.chip:hover { border-color: var(--ink); }
+.chip.is-on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+.filtros__pie { display: flex; align-items: center; gap: 1rem; margin-left: auto; }
+.filtros__cuenta { font-size: 0.78rem; color: var(--muted); margin: 0; }
+.filtros__limpiar {
+  font-family: var(--body); font-size: 0.68rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--accent); border-bottom: 1px solid var(--line-2); padding-bottom: 1px;
+}
+.filtros__limpiar:hover { border-bottom-color: var(--accent); }
+.filtros__vacio {
+  text-align: center; color: var(--muted); font-size: 0.95rem;
+  max-width: 46ch; margin: 1rem auto 0; line-height: 1.6;
+}
+
+/* La tabla se desliza sola en pantallas angostas, sin arrastrar la página */
+.tabla-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius); border: 1px solid var(--line); background: var(--paper); }
+.tabla-comp { width: 100%; min-width: 640px; border-collapse: collapse; text-align: left; }
+.tabla-comp th, .tabla-comp td { padding: 0.95rem 1.1rem; border-bottom: 1px solid var(--line); }
+.tabla-comp thead th {
+  font-family: var(--body); font-size: 0.62rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted);
+  background: var(--tint-2); border-bottom: 1px solid var(--line-2); white-space: nowrap;
+}
+.tabla-comp tbody tr:last-child th, .tabla-comp tbody tr:last-child td { border-bottom: 0; }
+.tabla-comp tbody tr:hover { background: var(--tint); }
+.tabla-comp tbody th { font-family: var(--display); font-size: 1rem; font-weight: 500; color: var(--ink); white-space: nowrap; }
+.tabla-comp tbody th a { color: inherit; border-bottom: 1px solid var(--line-2); }
+.tabla-comp tbody th a:hover { border-bottom-color: var(--ink); }
+.tabla-comp td { font-size: 0.88rem; color: var(--ink-2); }
+.tabla-comp td b { font-weight: 600; color: var(--ink); }
+.tabla-comp__det { display: block; font-size: 0.76rem; color: var(--muted); margin-top: 0.15rem; }
+.tabla-comp__ir { text-align: right; white-space: nowrap; }
+.tabla-comp__ir .arrow-link { font-size: 0.7rem; }
+
+@media (max-width: 860px) {
+  .filtros { gap: 1rem 1.4rem; }
+  .filtros__pie { margin-left: 0; width: 100%; justify-content: space-between;
+                  border-top: 1px solid var(--line); padding-top: 0.9rem; }
+}
+@media (max-width: 560px) {
+  .filtros__grupo { align-items: flex-start; flex-direction: column; gap: 0.55rem; width: 100%; }
+  .filtros__ops { width: 100%; }
+  /* Alto suficiente para el dedo, no solo para el texto */
+  .chip { flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center;
+          min-height: 42px; padding: 0.5rem 0.7rem; }
+  .tabla-comp th, .tabla-comp td { padding: 0.8rem 0.9rem; }
+}

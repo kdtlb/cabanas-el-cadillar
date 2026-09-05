@@ -52,7 +52,69 @@
 
 <section class="section">
   <div class="container">
+
+    <form class="filtros reveal" id="filtros" aria-label="Filtrar las cabañas">
+      <div class="filtros__grupo">
+        <span class="filtros__label" id="lbl-pax">¿Cuántos son?</span>
+        <div class="filtros__ops" role="group" aria-labelledby="lbl-pax" data-filtro="pax">
+          <button class="chip is-on" type="button" data-v="0" aria-pressed="true">Cualquiera</button>
+          <button class="chip" type="button" data-v="2" aria-pressed="false">2</button>
+          <button class="chip" type="button" data-v="3" aria-pressed="false">3</button>
+          <button class="chip" type="button" data-v="4" aria-pressed="false">4</button>
+          <button class="chip" type="button" data-v="5" aria-pressed="false">5</button>
+        </div>
+      </div>
+
+      <div class="filtros__grupo">
+        <span class="filtros__label" id="lbl-camas">Camas</span>
+        <div class="filtros__ops" role="group" aria-labelledby="lbl-camas" data-filtro="camas">
+          <button class="chip is-on" type="button" data-v="0" aria-pressed="true">Cualquiera</button>
+          <button class="chip" type="button" data-v="2" aria-pressed="false">2 o más</button>
+          <button class="chip" type="button" data-v="4" aria-pressed="false">4 o más</button>
+          <button class="chip" type="button" data-v="5" aria-pressed="false">5</button>
+        </div>
+      </div>
+
+      <div class="filtros__pie">
+        <p class="filtros__cuenta" id="filtros-cuenta" aria-live="polite"></p>
+        <button class="filtros__limpiar" type="button" id="filtros-limpiar" hidden>Quitar filtros</button>
+      </div>
+    </form>
+
     <div class="cabins__grid" id="cabins-grid"></div>
+
+    <p class="filtros__vacio" id="filtros-vacio" hidden>
+      Ninguna cabaña cumple con eso. Pruebe con menos personas o escríbanos y buscamos la combinación:
+      dos cabañas contiguas suelen resolverlo.
+    </p>
+  </div>
+</section>
+
+<!-- TABLA COMPARATIVA -->
+<section class="section" id="comparar" style="background:var(--tint);padding-top:0">
+  <div class="container">
+    <div class="text-center reveal" style="max-width:620px;margin:0 auto 2.5rem">
+      <span class="eyebrow eyebrow--center">De un vistazo</span>
+      <h2>Compare las diez</h2>
+      <div class="greca greca--center"></div>
+      <p class="lead mx-auto">Capacidad, camas y baños de cada cabaña, una al lado de la otra.</p>
+    </div>
+    <div class="tabla-wrap reveal">
+      <table class="tabla-comp" id="tabla-cabanas">
+        <caption class="sr-only">Comparación de capacidad, camas y baños de las diez cabañas</caption>
+        <thead>
+          <tr>
+            <th scope="col">Cabaña</th>
+            <th scope="col">Personas</th>
+            <th scope="col">Camas</th>
+            <th scope="col">Baños</th>
+            <th scope="col">Distintivo</th>
+            <th scope="col"><span class="sr-only">Ver la cabaña</span></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -95,6 +157,8 @@
 <script src="assets/js/main.js"></script>
 <script>
   renderCabinCards(document.getElementById('cabins-grid'));
+  renderCabinTable(document.querySelector('#tabla-cabanas tbody'));
+  initCabinFilter();
 </script>
 </body>
 </html>
