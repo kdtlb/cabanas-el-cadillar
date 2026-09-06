@@ -358,8 +358,10 @@ strong, b { font-weight: 600; color: var(--ink); }
 }
 .cabin-card__cta .ico { width: 14px; height: 14px; transition: transform var(--transition); }
 .cabin-card:hover .cabin-card__cta .ico { transform: translateX(4px); }
-/* En el adelanto de la portada, que va sobre fondo oscuro */
+/* Sobre fondo oscuro la tarjeta sigue siendo clara: hay que devolverle el
+   color al titular, porque ".dark h3" lo pinta de blanco y desaparecía */
 .dark .cabin-card { border-color: transparent; }
+.dark .cabin-card h3, .dark .cabin-card h3 a { color: var(--ink); }
 
 /* --- Grupos por capacidad --- */
 .cabin-group + .cabin-group { margin-top: clamp(2.6rem, 5vw, 4rem); }

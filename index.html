@@ -116,15 +116,38 @@
         <span class="eyebrow eyebrow--light">Nuestro alojamiento</span>
         <h2>Diez cabañas,<br>diez historias</h2>
       </div>
-      <p class="lead reveal" data-delay="1">Cada una con su propia personalidad, capacidad y vista. Elija la que mejor se acomode a lo que busca.</p>
+      <p class="lead reveal" data-delay="1">Son diez, y no hay dos iguales. Cada una tiene su propia planta y su carácter: una con hogar a leña de piedra, otra con quincho propio, otra con loft, otra asomada a un jardín de lavandas. Van de dos a cinco personas y todas tienen baño privado, kitchenette y WiFi.</p>
     </div>
 
-    <div class="cabins__grid" id="cabins-grid">
-      <!-- Adelanto de 3 cabañas (render por cabins-render.js) -->
+    <div class="slider-wrap reveal">
+      <div class="slider slider--links" tabindex="0" aria-label="Fotos de las cabañas">
+        <a class="slide" href="cabanas/cabana-1.html">
+          <img src="assets/img/cabanas/1/2.jpg" alt="Living de la Cabaña 1" loading="lazy">
+          <span class="slide__cap"><b>Cabaña 1</b><span>El living, con hogar a leña de piedra.</span></span>
+        </a>
+        <a class="slide" href="cabanas/cabana-4.html">
+          <img src="assets/img/cabanas/4/2.jpg" alt="Dormitorio de la Cabaña 4, con pared de piedra" loading="lazy">
+          <span class="slide__cap"><b>Cabaña 4</b><span>Pared de piedra bola y techo de caña.</span></span>
+        </a>
+        <a class="slide" href="cabanas/cabana-7.html">
+          <img src="assets/img/cabanas/7/1.jpg" alt="Living de la Cabaña 7" loading="lazy">
+          <span class="slide__cap"><b>Cabaña 7</b><span>Living amplio y luminoso para dos.</span></span>
+        </a>
+        <a class="slide" href="cabanas/cabana-9.html">
+          <img src="assets/img/cabanas/9/2.jpg" alt="Dormitorio de la Cabaña 9 bajo el techo de caña" loading="lazy">
+          <span class="slide__cap"><b>Cabaña 9</b><span>Dos dormitorios de adobe, para cuatro.</span></span>
+        </a>
+        <a class="slide" href="cabanas/cabana-6.html">
+          <img src="assets/img/cabanas/6/1.jpg" alt="Kitchenette de madera de la Cabaña 6" loading="lazy">
+          <span class="slide__cap"><b>Cabaña 6</b><span>Kitchenette de madera y azulejos.</span></span>
+        </a>
+      </div>
+      <button class="slider__nav slider__nav--prev" type="button" aria-label="Foto anterior"><span class="ico" data-icon="arrow-left"></span></button>
+      <button class="slider__nav slider__nav--next" type="button" aria-label="Foto siguiente"><span class="ico" data-icon="arrow"></span></button>
     </div>
 
     <div class="cabins__more reveal">
-      <a href="cabanas.html" class="btn btn--ghost-light btn--lg">Ver las diez cabañas</a>
+      <a href="cabanas.html" class="btn btn--gold btn--lg">Ver las diez cabañas</a>
     </div>
   </div>
 </section>
@@ -364,12 +387,6 @@
 </footer>
 
 <script src="assets/js/icons.js"></script>
-<script src="assets/js/cabins-data.js"></script>
-<script src="assets/js/cabins-render.js"></script>
 <script src="assets/js/main.js"></script>
-<script>
-  /* Adelanto de 3 cabañas en la home; el listado completo vive en cabanas.html */
-  renderCabinCards(document.getElementById('cabins-grid'), 3);
-</script>
 </body>
 </html>

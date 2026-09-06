@@ -66,15 +66,6 @@
     }
   }
 
-  /* Adelanto suelto (portada): sin agrupar */
-  window.renderCabinCards = function (grid, limit) {
-    if (!window.CABINS || !grid) return;
-    const list = limit ? window.CABINS.slice(0, limit) : window.CABINS;
-    list.forEach((c, i) => grid.appendChild(card(c, i)));
-    if (window.applyIcons) window.applyIcons(grid);
-    observe(grid);
-  };
-
   /* Listado completo agrupado por capacidad, de menor a mayor */
   window.renderCabinGroups = function (cont) {
     if (!window.CABINS || !cont) return;

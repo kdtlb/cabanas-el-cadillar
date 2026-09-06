@@ -236,9 +236,13 @@
       return s.getBoundingClientRect().width + parseFloat(getComputedStyle(via).columnGap || 0);
     };
     const marcar = () => {
+      // El carril se derrama a los bordes con margen negativo y relleno, así
+      // que en reposo scrollLeft vale ese relleno y no cero: comparar contra 0
+      // dejaba la flecha "anterior" siempre encendida
+      const origen = parseFloat(getComputedStyle(via).paddingLeft) || 0;
       const max = via.scrollWidth - via.clientWidth;
-      prev.disabled = via.scrollLeft < 4;
-      next.disabled = via.scrollLeft > max - 4;
+      prev.disabled = via.scrollLeft <= origen + 4;
+      next.disabled = via.scrollLeft >= max - 4;
     };
     prev.addEventListener('click', () => via.scrollBy({ left: -paso(), behavior: 'smooth' }));
     next.addEventListener('click', () => via.scrollBy({ left: paso(), behavior: 'smooth' }));
@@ -322,7 +326,9 @@
 
   /* ---- Visor de fotos (galerías) ---- */
   (function () {
-    const links = Array.prototype.slice.call(document.querySelectorAll('.gallery a, .cabin-gallery a, .slider a'));
+    // .slider--links lleva a otra página: ese no abre el visor
+    const links = Array.prototype.slice.call(
+      document.querySelectorAll('.gallery a, .cabin-gallery a, .slider:not(.slider--links) a'));
     if (!links.length) return;
 
     const box = document.createElement('div');
