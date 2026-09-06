@@ -27,18 +27,19 @@
   .geo-panel__head h1 { font-size: 1.9rem; line-height: 1.05; letter-spacing: -0.03em; }
   .geo-panel__intro { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-top: 0.7rem; }
 
-  .geo-block { margin-top: 1.6rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
-  .geo-block > h2 { font-family: var(--body); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 1rem; }
+  .geo-block { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); }
+  .geo-block > h2 { font-family: var(--body); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.9rem; }
+
+  /* Apostillas: aclaraciones cortas atadas a lo que tienen encima, sin
+     separador propio para que no parezcan un apartado más */
+  .geo-hint { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.85rem; font-size: 0.78rem; line-height: 1.5; color: var(--muted); }
+  .geo-hint__pin { width: 11px; height: 15px; flex: none; background: #bd6a41; border: 1.5px solid #fff; box-shadow: 0 0 0 1px rgba(23,22,18,0.2); border-radius: 50% 50% 50% 50% / 42% 42% 62% 62%; clip-path: polygon(50% 100%, 0 55%, 0 0, 100% 0, 100% 55%); }
+  .btn--ancho { width: 100%; justify-content: center; }
 
   /* Segmentado: vista del mapa */
   .seg { display: flex; border: 1px solid var(--line-2); border-radius: var(--radius); padding: 3px; gap: 3px; }
   .seg button { flex: 1; padding: 0.55rem 0.3rem; border-radius: 1px; font-family: var(--body); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; color: var(--muted); transition: var(--transition); }
   .seg button.is-active { background: var(--ink); color: var(--paper); }
-
-  /* Referencia fija: la ubicación de las cabañas */
-  .legend-fixed { display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 0 0; margin-top: 1rem; border-top: 1px solid var(--line); }
-  .legend-fixed__pin { width: 13px; height: 17px; flex: none; background: #bd6a41; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(23,22,18,0.18); border-radius: 50% 50% 50% 50% / 42% 42% 62% 62%; clip-path: polygon(50% 100%, 0 55%, 0 0, 100% 0, 100% 55%); }
-  .legend-fixed__txt { font-size: 0.8rem; color: var(--ink); font-weight: 500; }
 
   .geo-note { font-size: 0.76rem; color: var(--muted); line-height: 1.6; margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
 
@@ -116,7 +117,8 @@
     <div class="geo-panel__head">
       <span class="eyebrow">Geoportal</span>
       <h1>El mapa del entorno</h1>
-      <p class="geo-panel__intro">Aquí está el Cadillar, entre los cerros y a veinticinco minutos de Tarija. Acerque la vista para reconocer el predio, o cambie a mapa o relieve para ubicarse en la zona.</p>
+      <p class="geo-panel__intro">Aquí está el Cadillar, entre los cerros y a veinticinco minutos de Tarija.</p>
+      <p class="geo-hint"><span class="geo-hint__pin" aria-hidden="true"></span>El marcador señala el predio</p>
     </div>
 
     <div class="geo-block">
@@ -126,13 +128,14 @@
         <button data-base="relieve">Relieve</button>
         <button class="is-active" data-base="satelite">Satélite</button>
       </div>
-      <div class="legend-fixed"><span class="legend-fixed__pin"></span><span class="legend-fixed__txt">El Cadillar Apart Hotel</span></div>
+      <p class="geo-hint">Acerque para reconocer las cabañas, o pase a mapa o relieve para ubicarse en la zona.</p>
     </div>
 
     <div class="geo-block">
       <h2>Cómo llegar</h2>
-      <p class="geo-panel__intro">Camino a la Yesera, a 25 minutos del centro de Tarija. Si viene en auto, le pasamos la ubicación exacta por WhatsApp al confirmar la reserva.</p>
-      <a class="btn btn--gold" href="https://www.google.com/maps/search/?api=1&amp;query=-21.499031775530792,-64.77102580573317" target="_blank" rel="noopener">Abrir en Google Maps</a>
+      <p class="geo-panel__intro">Camino a la Yesera, a 25 minutos del centro de Tarija.</p>
+      <a class="btn btn--gold btn--ancho" href="https://www.google.com/maps/search/?api=1&amp;query=-21.499031775530792,-64.77102580573317" target="_blank" rel="noopener">Abrir en Google Maps</a>
+      <p class="geo-hint">Al confirmar la reserva le pasamos la ubicación exacta por WhatsApp.</p>
     </div>
 
     <p class="geo-note">Mapa © OpenStreetMap · OpenTopoMap · Google.</p>
