@@ -80,6 +80,9 @@
   .leaflet-bar a { color: var(--ink); border-radius: 0 !important; }
   .leaflet-bar a:hover { background: var(--paper); }
   .leaflet-control-attribution { font-size: 10px; }
+  /* El mapa base de OpenStreetMap viene bastante saturado: se apaga para que
+     acompañe la paleta cálida del sitio sin perder legibilidad */
+  .base-mapa { filter: saturate(0.42) contrast(0.94) brightness(1.05); }
   .leaflet-popup-content-wrapper { border-radius: var(--radius); box-shadow: var(--shadow-md); }
   .leaflet-popup-content { font-family: var(--body); font-size: 0.86rem; }
   .leaflet-popup-content strong { font-family: var(--display); }
@@ -235,7 +238,10 @@
 
   // Mapas base
   const bases = {
-    mapa: L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { subdomains: 'abcd', maxZoom: 20, attribution: '© OpenStreetMap · © CARTO' }),
+    // CARTO pasó a exigir clave y estampaba "API KEY REQUIRED" sobre cada
+    // mosaico; OpenStreetMap no pide clave. Se le baja la saturación por CSS
+    // (.base-mapa) para que no desentone con la paleta del sitio.
+    mapa: L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { className: 'base-mapa', maxZoom: 19, attribution: '© Colaboradores de OpenStreetMap' }),
     relieve: L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { subdomains: 'abc', maxZoom: 17, attribution: '© OpenTopoMap (CC-BY-SA)' }),
     satelite: L.tileLayer('https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', { subdomains: ['mt0','mt1','mt2','mt3'], maxZoom: 20, attribution: 'Imágenes © Google' })
   };
