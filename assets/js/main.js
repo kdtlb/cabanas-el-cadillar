@@ -328,7 +328,7 @@
   (function () {
     // .slider--links lleva a otra página: ese no abre el visor
     const links = Array.prototype.slice.call(
-      document.querySelectorAll('.gallery a, .cabin-gallery a, .slider:not(.slider--links) a'));
+      document.querySelectorAll('.gallery a, .cabin-gallery a, .plano__img, .slider:not(.slider--links) a'));
     if (!links.length) return;
 
     const box = document.createElement('div');

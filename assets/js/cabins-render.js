@@ -27,6 +27,7 @@
           <div><dt>Personas</dt><dd>${c.pax}</dd></div>
           <div><dt>Camas</dt><dd>${c.bedCount}</dd></div>
           <div><dt>Baños</dt><dd>${c.baths}</dd></div>
+          <div><dt>Superficie</dt><dd>${c.m2}<small> m²</small></dd></div>
         </dl>
         <p class="cabin-card__det">${c.beds}</p>
         <span class="cabin-card__cta">Ver la cabaña <span class="ico" data-icon="arrow"></span></span>
@@ -92,6 +93,7 @@
         '<td data-th="Personas"><b>' + c.pax + '</b></td>' +
         '<td data-th="Camas"><b>' + c.bedCount + '</b> <span class="tabla-comp__det">' + c.beds + '</span></td>' +
         '<td data-th="Baños">' + c.baths + '</td>' +
+        '<td data-th="Superficie"><b>' + c.m2 + '</b> m²</td>' +
         '<td data-th="Distintivo">' + c.tag + '</td>' +
         '<td class="tabla-comp__ir"><a class="arrow-link" href="' + c.url + '">Ver <span class="ico" data-icon="arrow"></span></a></td>';
       tbody.appendChild(tr);
