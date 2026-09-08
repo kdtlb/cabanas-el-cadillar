@@ -121,7 +121,7 @@ const page = (c, i) => {
         </a>
         <p class="plano__note">
           <b>Solo de referencia:</b> el plano ilustra cómo está distribuida la ${c.name}
-          en sus ${c.m2} m², pero pueden existir diferencias sutiles con la cabaña real.
+          en sus ${c.m2} m², pero pueden existir diferencias con la cabaña real.
           Toque la imagen para verla en grande.
         </p>
       </div>

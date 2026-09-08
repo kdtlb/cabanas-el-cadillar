@@ -809,7 +809,7 @@ strong, b { font-weight: 600; color: var(--ink); }
   margin-top: 0.9rem; padding: 0.85rem 1.1rem;
   background: var(--surface); border-left: 3px solid var(--line-2);
   border-radius: 0 var(--radius) var(--radius) 0;
-  font-size: 0.8rem; color: var(--muted); line-height: 1.6; max-width: 70ch;
+  font-size: 0.8rem; color: var(--muted); line-height: 1.6;
 }
 .plano__note b { color: var(--ink-2); font-weight: 600; }
 
