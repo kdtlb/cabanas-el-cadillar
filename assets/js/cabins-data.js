@@ -114,7 +114,6 @@
     c.img = () => c.imgPath(c.hero);           // foto principal (tarjeta + hero)
     c.designImg = () => c.imgPath(c.design);   // foto de la sección "La cabaña"
     c.galleryPaths = () => Array.from({ length: c.photos }, (_, k) => c.imgPath(k + 1));
-    c.planPath = () => `assets/img/planos/${c.dir}.jpg`;   // ilustración de la distribución
   });
 
   window.CABINS = CABINS;

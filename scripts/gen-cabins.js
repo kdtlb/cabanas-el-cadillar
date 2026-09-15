@@ -111,22 +111,6 @@ const page = (c, i) => {
       </div>
     </div>
 
-    <!-- Distribución -->
-    <div class="cabin-section reveal">
-      <span class="eyebrow">La distribución</span>
-      <h2>${c.m2} m² así repartidos</h2>
-      <div class="plano">
-        <a class="plano__img" href="../${c.planPath()}">
-          <img src="../${c.planPath()}" alt="Plano de la ${c.name}: distribución de ambientes y camas" loading="lazy">
-        </a>
-        <p class="plano__note">
-          <b>Solo de referencia:</b> el plano ilustra cómo está distribuida la ${c.name}
-          en sus ${c.m2} m², pero pueden existir diferencias con la cabaña real.
-          Toque la imagen para verla en grande.
-        </p>
-      </div>
-    </div>
-
     <!-- Características -->
     <div class="cabin-section reveal">
       <span class="eyebrow">Características</span>
@@ -202,7 +186,7 @@ const page = (c, i) => {
       </div>
       <div><h4>Explorar</h4><ul><li><a href="../cabanas.html">Las cabañas</a></li><li><a href="../eventos.html">Empresas</a></li><li><a href="../tarija.html">Descubra Tarija</a></li>
       <li><a href="../mapa.html">El mapa</a></li><li><a href="../reservas.html">Reservas</a></li></ul></div>
-      <div><h4>Contacto</h4><ul class="footer__contact"><li><span class="label">Dirección</span>Camino al Cadillar · a 25 min de Tarija</li><li><span class="label">WhatsApp</span><a href="https://wa.me/59175600149" target="_blank" rel="noopener">+591 75600149</a></li></ul></div>
+      <div><h4>Contacto</h4><ul class="footer__contact"><li><span class="label">Dirección</span>Camino al Cadillar · a 7 km de Tarija</li><li><span class="label">WhatsApp</span><a href="https://wa.me/59175600149" target="_blank" rel="noopener">+591 75600149</a></li></ul></div>
     </div>
     <div class="footer__bottom">
       <span>&copy; <span data-year></span> El Cadillar Apart Hotel. Todos los derechos reservados.</span>

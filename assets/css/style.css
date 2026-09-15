@@ -795,23 +795,6 @@ strong, b { font-weight: 600; color: var(--ink); }
   .cabin-gallery[data-fotos="3"] a:first-child { grid-row: 1; grid-column: 1 / span 2; }
 }
 
-/* Plano de la cabaña: la ilustración ya viene sobre papel crema, así que el
-   marco solo la encuadra y la deja respirar */
-.plano { margin-top: 1.6rem; }
-.plano__img {
-  display: block; background: var(--surface); border: 1px solid var(--line);
-  border-radius: var(--radius); overflow: hidden; cursor: zoom-in;
-}
-.plano__img img { display: block; width: 100%; height: auto; }
-/* La aclaración va sobre fondo tenue y con un filete al costado: es una
-   advertencia, no un pie de foto, y conviene que se lea como tal */
-.plano__note {
-  margin-top: 0.9rem; padding: 0.85rem 1.1rem;
-  background: var(--surface); border-left: 3px solid var(--line-2);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  font-size: 0.8rem; color: var(--muted); line-height: 1.6;
-}
-.plano__note b { color: var(--ink-2); font-weight: 600; }
 
 .booking-card { background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--ink); border-radius: var(--radius); padding: 2rem; position: sticky; top: calc(var(--nav-h) + 24px); }
 .booking-card__price { font-family: var(--display); font-size: 2.4rem; color: var(--ink); font-weight: 500; letter-spacing: -0.02em; }
