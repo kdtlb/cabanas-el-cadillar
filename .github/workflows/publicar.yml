@@ -25,6 +25,11 @@ jobs:
         with:
           node-version: 22
       - run: npm run build
+        env:
+          # Publicación en https://kdtlb.github.io/cabanas-el-cadillar/. Con dominio propio:
+          # SITE_URL con el dominio, BASE_PATH vacío y un archivo public/CNAME con el dominio.
+          SITE_URL: https://kdtlb.github.io
+          BASE_PATH: cabanas-el-cadillar
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

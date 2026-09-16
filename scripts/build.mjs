@@ -10,6 +10,8 @@
  *    y títulos o descripciones repetidos. Si algo falla, la compilación termina con error.
  *
  * Uso: npm run build
+ * Dentro de una carpeta (GitHub Pages sin dominio propio):
+ *   SITE_URL=https://kdtlb.github.io BASE_PATH=cabanas-el-cadillar npm run build
  */
 import { copyFile, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -18,6 +20,7 @@ import { fileURLToPath } from 'node:url';
 
 import { site } from '../src/config/site.js';
 import { createContext } from '../src/lib/context.js';
+import { absoluteUrl, applyBasePath, withBase } from '../src/lib/paths.js';
 import { renderDocument } from '../src/components/layout.js';
 import { buildPages } from '../src/pages/index.js';
 
@@ -125,6 +128,9 @@ function resolves(ref) {
 }
 
 async function main() {
+  if (site.basePath && !/^(\/[\w.-]+)+$/.test(site.basePath)) {
+    throw new Error(`BASE_PATH no es válido ("${site.basePath}"): debe ser el nombre de la carpeta, por ejemplo cabanas-el-cadillar.`);
+  }
   await mkdir(DIST, { recursive: true });
   const copied = await syncPublic();
   const css = await bundle(STYLES, 'site', 'css', minifyCss);
@@ -154,8 +160,8 @@ async function main() {
   let htmlBytes = 0;
   for (const page of pages) {
     const html = renderDocument(page.ctx, page);
-    htmlBytes += await emit(pageFile(page.path), html);
     for (const ref of inspect(page, html)) references.set(ref, page.path);
+    htmlBytes += await emit(pageFile(page.path), applyBasePath(html));
     if (!page.noindex) {
       if (titles.has(page.title)) problems.push(`Título repetido en ${titles.get(page.title)} y ${page.path}: "${page.title}"`);
       if (descriptions.has(page.description)) problems.push(`Descripción repetida en ${descriptions.get(page.description)} y ${page.path}`);
@@ -170,15 +176,15 @@ async function main() {
     .filter((page) => !page.noindex)
     .map((page) => {
       const images = (page.sitemapImages || [])
-        .map((src) => `<image:image><image:loc>${xml(new URL(src, site.url).href)}</image:loc></image:image>`)
+        .map((src) => `<image:image><image:loc>${xml(absoluteUrl(src))}</image:loc></image:image>`)
         .join('');
-      return `  <url><loc>${xml(new URL(page.path, site.url).href)}</loc><lastmod>${today}</lastmod>${images}</url>`;
+      return `  <url><loc>${xml(absoluteUrl(page.path))}</loc><lastmod>${today}</lastmod>${images}</url>`;
     });
   await emit(
     'sitemap.xml',
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls.join('\n')}\n</urlset>\n`,
   );
-  await emit('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${new URL('/sitemap.xml', site.url).href}\n`);
+  await emit('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${absoluteUrl('/sitemap.xml')}\n`);
   await emit(
     'site.webmanifest',
     `${JSON.stringify(
@@ -186,13 +192,13 @@ async function main() {
         name: site.name,
         short_name: site.shortName,
         lang: site.locales[site.defaultLocale].lang,
-        start_url: '/',
+        start_url: withBase('/'),
         display: 'minimal-ui',
         background_color: '#FDFCF7',
         theme_color: '#61483A',
         icons: [
-          { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-          { src: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+          { src: withBase('/icon-192.png'), sizes: '192x192', type: 'image/png' },
+          { src: withBase('/icon-512.png'), sizes: '512x512', type: 'image/png' },
         ],
       },
       null,

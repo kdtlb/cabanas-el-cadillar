@@ -113,10 +113,13 @@ sola en la portada cuando hay al menos uno.
 
 ## Publicación
 
-1. Confirmar el dominio en `src/config/site.js` (`url`).
-2. **GitHub Pages:** el flujo `.github/workflows/publicar.yml` compila y publica en cada cambio de
-   `main`. Activarlo una vez en *Settings → Pages → Source: GitHub Actions*. Para un dominio propio,
-   crear `public/CNAME` con el dominio.
+El sitio se publica en **https://kdtlb.github.io/cabanas-el-cadillar/**.
+
+1. **GitHub Pages:** el flujo `.github/workflows/publicar.yml` compila y publica en cada cambio de
+   `main` (*Settings → Pages → Source: GitHub Actions*). Como el sitio vive dentro de una carpeta,
+   compila con `SITE_URL=https://kdtlb.github.io` y `BASE_PATH=cabanas-el-cadillar`.
+2. **Dominio propio:** cuando esté registrado, crear `public/CNAME` con el dominio, apuntar el DNS a
+   GitHub Pages y, en el flujo, poner el dominio en `SITE_URL` y dejar `BASE_PATH` vacío.
 3. **Netlify / Cloudflare Pages:** comando `npm run build`, carpeta de salida `dist`.
 4. **Hosting tradicional:** ejecutar `npm run build` y subir el contenido de `dist/`.
 5. Dar de alta el sitio en Google Search Console y enviar `sitemap.xml`.
@@ -140,7 +143,8 @@ sola en la portada cuando hay al menos uno.
 
 Estos datos no estaban en el material y el sitio no los inventa (quedan ocultos hasta completarlos):
 
-- Dominio definitivo (se usa `www.elcadillaraparthotel.com`, tomado de la papelería del manual).
+- Dominio definitivo: `www.elcadillaraparthotel.com` figura en la papelería del manual, pero todavía
+  no está registrado. Mientras tanto el sitio se publica en GitHub Pages.
 - Teléfono para llamadas, correo electrónico y dirección postal exacta.
 - Horarios de check-in y check-out, qué incluye la estadía, mascotas, estacionamiento, WiFi y precios.
 - Cabaña 1: las camas suman 6 plazas y la capacidad es de 5 personas; no se ve cocina en las fotos.

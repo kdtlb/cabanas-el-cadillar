@@ -17,9 +17,14 @@ export const site = {
   // Frase de la tarjeta de presentación del manual de marca.
   tagline: { es: 'Naturaleza y descanso' },
 
-  // PENDIENTE: confirmar el dominio definitivo. Es el que figura en la
-  // papelería del manual de marca (www.elcadillaraparthotel.com).
-  url: 'https://www.elcadillaraparthotel.com',
+  // Dirección pública y carpeta de publicación. Al compilar se pueden cambiar con
+  // las variables SITE_URL y BASE_PATH: el flujo de GitHub Actions publica en
+  // https://kdtlb.github.io/cabanas-el-cadillar/.
+  // PENDIENTE: dominio definitivo. El de la papelería del manual de marca
+  // (www.elcadillaraparthotel.com) todavía no está registrado.
+  url: process.env.SITE_URL || 'https://www.elcadillaraparthotel.com',
+  // Nombre de la carpeta, con o sin barras: "cabanas-el-cadillar" → "/cabanas-el-cadillar"
+  basePath: (process.env.BASE_PATH || '').replace(/^\/+|\/+$/g, '').replace(/^(?=.)/, '/'),
 
   defaultLocale: 'es',
   locales: {
