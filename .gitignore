@@ -1,7 +1,15 @@
-# Material de origen de la marca (archivos .ai / manual): se conserva en local,
-# no se publica porque el sitio se sirve entero desde GitHub Pages.
+# Material de origen (fotos originales y archivos de diseño): se conserva en local.
+# Las versiones optimizadas que usa el sitio están en public/img y public/marca.
 DISEÑO/
 Imagenes/
 
-# Herramienta interna para redimensionar imágenes, no forma parte del sitio
-_r.html
+# Resultado de la compilación (se genera con `npm run build`)
+dist/
+
+# Caché del optimizador de imágenes
+.cache/
+
+# Sistema y dependencias
+node_modules/
+.DS_Store
+Thumbs.db

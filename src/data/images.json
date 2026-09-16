@@ -1,0 +1,1147 @@
+{
+  "exterior-cabanas-arbol-florido": {
+    "width": 4096,
+    "height": 2304,
+    "widths": [
+      640,
+      960,
+      1280,
+      1920,
+      2560
+    ],
+    "color": "#878187",
+    "og": "/img/og/exterior-cabanas-arbol-florido.jpg"
+  },
+  "exterior-cabana-dia-de-sol": {
+    "width": 1280,
+    "height": 758,
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "color": "#8a827c",
+    "og": null
+  },
+  "vista-piscina-cerros": {
+    "width": 4096,
+    "height": 2304,
+    "widths": [
+      640,
+      960,
+      1280,
+      1920,
+      2560
+    ],
+    "color": "#8b8875",
+    "og": "/img/og/vista-piscina-cerros.jpg"
+  },
+  "vista-piscina-cerros-vertical": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#959996",
+    "og": null
+  },
+  "piscina-valle": {
+    "width": 960,
+    "height": 1280,
+    "widths": [
+      480,
+      800,
+      960
+    ],
+    "color": "#717c8e",
+    "og": "/img/og/piscina-valle.jpg"
+  },
+  "piscina-cabanas": {
+    "width": 960,
+    "height": 1280,
+    "widths": [
+      480,
+      800,
+      960
+    ],
+    "color": "#758095",
+    "og": null
+  },
+  "piscina-sombra-arboles": {
+    "width": 960,
+    "height": 1280,
+    "widths": [
+      480,
+      800,
+      960
+    ],
+    "color": "#687b99",
+    "og": null
+  },
+  "piscina-entre-ramas": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#80807c",
+    "og": null
+  },
+  "quincho-mesa-larga": {
+    "width": 960,
+    "height": 1280,
+    "widths": [
+      480,
+      800,
+      960
+    ],
+    "color": "#907063",
+    "og": "/img/og/quincho-mesa-larga.jpg"
+  },
+  "quincho-parrilla": {
+    "width": 960,
+    "height": 1280,
+    "widths": [
+      480,
+      800,
+      960
+    ],
+    "color": "#9b7966",
+    "og": null
+  },
+  "quincho-salon": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#766652",
+    "og": null
+  },
+  "terraza-cactus-mural": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#a38a79",
+    "og": "/img/og/terraza-cactus-mural.jpg"
+  },
+  "terraza-mesas": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#a29395",
+    "og": null
+  },
+  "pergola-patio": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#756d63",
+    "og": null
+  },
+  "salon-eventos-entrada": {
+    "width": 960,
+    "height": 1280,
+    "widths": [
+      480,
+      800,
+      960
+    ],
+    "color": "#99795b",
+    "og": "/img/og/salon-eventos-entrada.jpg"
+  },
+  "jardin-pergola-cabanas": {
+    "width": 4096,
+    "height": 2304,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#76745f",
+    "og": null
+  },
+  "sendero-muro-piedra": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#7a7670",
+    "og": null
+  },
+  "jardin-sendero": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#797564",
+    "og": null
+  },
+  "detalle-ceramicas": {
+    "width": 4096,
+    "height": 2304,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#a18365",
+    "og": null
+  },
+  "detalle-cocina-antigua": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#a58572",
+    "og": null
+  },
+  "detalle-chimenea-piedra": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#73696d",
+    "og": null
+  },
+  "detalle-rueda-carreta": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#988e86",
+    "og": null
+  },
+  "detalle-florero": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#886250",
+    "og": null
+  },
+  "detalle-cuadro-semillas": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#86694b",
+    "og": null
+  },
+  "detalle-bordado": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#b29e8a",
+    "og": null
+  },
+  "detalle-cortinas": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#50453f",
+    "og": null
+  },
+  "dormitorio-ladrillo": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#766250",
+    "og": null
+  },
+  "habitacion-pared-azul": {
+    "width": 2304,
+    "height": 4096,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#675853",
+    "og": null
+  },
+  "cabana-1-living-hogar": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#422f26",
+    "og": "/img/og/cabana-1-living-hogar.jpg"
+  },
+  "cabana-1-galeria": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#52342a",
+    "og": null
+  },
+  "cabana-1-estar": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#553b2d",
+    "og": null
+  },
+  "cabana-1-dormitorio": {
+    "width": 1080,
+    "height": 1620,
+    "widths": [
+      480,
+      800,
+      1080
+    ],
+    "color": "#897357",
+    "og": null
+  },
+  "cabana-1-exterior": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#857b76",
+    "og": null
+  },
+  "cabana-2-comedor-cocina": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#5b3e2d",
+    "og": "/img/og/cabana-2-comedor-cocina.jpg"
+  },
+  "cabana-2-parrilla": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#665950",
+    "og": null
+  },
+  "cabana-2-living": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#826152",
+    "og": null
+  },
+  "cabana-2-cocina": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#4d2d1b",
+    "og": null
+  },
+  "cabana-2-mesa": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#6d4730",
+    "og": null
+  },
+  "cabana-2-sofa-cama": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#6d4832",
+    "og": null
+  },
+  "cabana-2-dormitorio-simples": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#5e4e46",
+    "og": null
+  },
+  "cabana-2-dormitorio": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#947864",
+    "og": null
+  },
+  "cabana-2-cama-simple": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#71676a",
+    "og": null
+  },
+  "cabana-2-detalle": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#51413e",
+    "og": null
+  },
+  "cabana-3-galeria-lavandas": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#423935",
+    "og": "/img/og/cabana-3-galeria-lavandas.jpg"
+  },
+  "cabana-3-dormitorio": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#694a43",
+    "og": null
+  },
+  "cabana-3-bano": {
+    "width": 1080,
+    "height": 1620,
+    "widths": [
+      480,
+      800,
+      1080
+    ],
+    "color": "#ada8a6",
+    "og": null
+  },
+  "cabana-4-planta-baja": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#6d605b",
+    "og": "/img/og/cabana-4-planta-baja.jpg"
+  },
+  "cabana-4-planta-alta": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#75665d",
+    "og": null
+  },
+  "cabana-4-bano": {
+    "width": 1080,
+    "height": 1620,
+    "widths": [
+      480,
+      800,
+      1080
+    ],
+    "color": "#5f5b58",
+    "og": null
+  },
+  "cabana-5-dormitorio": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#4c3325",
+    "og": "/img/og/cabana-5-dormitorio.jpg"
+  },
+  "cabana-5-kitchenette": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#6b5856",
+    "og": null
+  },
+  "cabana-5-mesa": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#755f4b",
+    "og": null
+  },
+  "cabana-5-cama-simple": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#5e4d40",
+    "og": null
+  },
+  "cabana-5-bano": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#5f5650",
+    "og": null
+  },
+  "cabana-6-dormitorio": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#a68570",
+    "og": "/img/og/cabana-6-dormitorio.jpg"
+  },
+  "cabana-6-cama": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#755a49",
+    "og": null
+  },
+  "cabana-6-kitchenette": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#7e5e4a",
+    "og": null
+  },
+  "cabana-6-mesa": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#745747",
+    "og": null
+  },
+  "cabana-6-bano": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#36322e",
+    "og": null
+  },
+  "cabana-7-living": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#8c694b",
+    "og": "/img/og/cabana-7-living.jpg"
+  },
+  "cabana-7-cocina-comedor": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#8f6d58",
+    "og": null
+  },
+  "cabana-7-dormitorio": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#9e7e6a",
+    "og": null
+  },
+  "cabana-7-estar": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#8c6852",
+    "og": null
+  },
+  "cabana-7-dormitorio-bano": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#977666",
+    "og": null
+  },
+  "cabana-7-bano": {
+    "width": 1080,
+    "height": 1620,
+    "widths": [
+      480,
+      800,
+      1080
+    ],
+    "color": "#5e4432",
+    "og": null
+  },
+  "cabana-8-dormitorio": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#877870",
+    "og": "/img/og/cabana-8-dormitorio.jpg"
+  },
+  "cabana-8-kitchenette": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#7f6a5b",
+    "og": null
+  },
+  "cabana-8-sofa-cama": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#9a7966",
+    "og": null
+  },
+  "cabana-8-dormitorio-tv": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#5b4b41",
+    "og": null
+  },
+  "cabana-8-bano": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#696263",
+    "og": null
+  },
+  "cabana-9-loft": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#6e4f35",
+    "og": "/img/og/cabana-9-loft.jpg"
+  },
+  "cabana-9-estar-cocina": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#573f2f",
+    "og": null
+  },
+  "cabana-9-dormitorio-doble": {
+    "width": 1080,
+    "height": 1620,
+    "widths": [
+      480,
+      800,
+      1080
+    ],
+    "color": "#8f7558",
+    "og": null
+  },
+  "cabana-9-nicho": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#644530",
+    "og": null
+  },
+  "cabana-9-camas-simples": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#916943",
+    "og": null
+  },
+  "cabana-9-cama-nicho": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#543b2b",
+    "og": null
+  },
+  "cabana-9-cocina": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#624c3c",
+    "og": null
+  },
+  "cabana-9-ambientes": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#412f22",
+    "og": null
+  },
+  "cabana-9-vista-escalera": {
+    "width": 1080,
+    "height": 1620,
+    "widths": [
+      480,
+      800,
+      1080
+    ],
+    "color": "#61452d",
+    "og": null
+  },
+  "cabana-10-estar": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#955831",
+    "og": "/img/og/cabana-10-estar.jpg"
+  },
+  "cabana-10-dormitorio": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#8c5e3d",
+    "og": null
+  },
+  "cabana-10-loft": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#734e32",
+    "og": null
+  },
+  "cabana-10-escalera": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#84563d",
+    "og": null
+  },
+  "cabana-10-kitchenette": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#a16641",
+    "og": null
+  },
+  "cabana-10-ambientes": {
+    "width": 1620,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#835e45",
+    "og": null
+  },
+  "cabana-10-vista-alta": {
+    "width": 1080,
+    "height": 1620,
+    "widths": [
+      480,
+      800,
+      1080
+    ],
+    "color": "#8e5935",
+    "og": null
+  },
+  "cabana-10-bano": {
+    "width": 1080,
+    "height": 1620,
+    "widths": [
+      480,
+      800,
+      1080
+    ],
+    "color": "#a49b93",
+    "og": null
+  },
+  "tarija-coimata": {
+    "width": 1920,
+    "height": 1280,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#828888",
+    "og": "/img/og/tarija-coimata.jpg"
+  },
+  "tarija-san-lorenzo": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#68635c",
+    "og": null
+  },
+  "tarija-valle-san-lorenzo": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#72726e",
+    "og": null
+  },
+  "tarija-sama-tajzara": {
+    "width": 1920,
+    "height": 1079,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#6587c0",
+    "og": null
+  },
+  "tarija-fiesta-san-roque": {
+    "width": 1920,
+    "height": 1271,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#9e8f90",
+    "og": null
+  },
+  "tarija-lago-san-jacinto": {
+    "width": 1920,
+    "height": 896,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#6a8093",
+    "og": null
+  },
+  "tarija-vinedos": {
+    "width": 1920,
+    "height": 1440,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#708383",
+    "og": null
+  },
+  "tarija-casa-dorada": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#4d5766",
+    "og": null
+  },
+  "tarija-saice": {
+    "width": 1920,
+    "height": 1368,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#a79788",
+    "og": null
+  },
+  "tarija-chorros-jurina": {
+    "width": 1920,
+    "height": 2560,
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "color": "#5a5947",
+    "og": null
+  },
+  "tarija-canon-pilaya": {
+    "width": 4000,
+    "height": 2256,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "color": "#436787",
+    "og": null
+  }
+}

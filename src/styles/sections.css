@@ -1,0 +1,782 @@
+/* ==========================================================================
+   Bloques: llamado a reservar, visor de fotos, mapa, distancias, cifras,
+   beneficios, tarjetas informativas, destinos, contacto y pasos
+   ========================================================================== */
+
+/* ---------- Llamado a reservar: sobre Amarillo Sol, como la franja final del manual ---------- */
+
+.cta-band {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--section-y) calc(var(--section-y) + 2rem);
+  background: var(--sol);
+  color: var(--corteza-oscuro);
+}
+
+.cta-band__hills {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(4rem, 10vw, 8rem);
+  color: rgb(97 72 58 / 0.2);
+}
+
+.cta-band__hills path,
+.not-found__hills path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.cta-band__inner {
+  position: relative;
+  display: grid;
+  align-items: center;
+  gap: var(--space-xl);
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+}
+
+.cta-band h2 {
+  font-size: var(--fs-2xl);
+}
+
+.cta-band__text p {
+  max-width: 36rem;
+  margin-top: var(--space-md);
+  font-size: var(--fs-md);
+}
+
+.cta-band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.cta-band .btn--ghost {
+  border-color: rgb(97 72 58 / 0.45);
+}
+
+@media (min-width: 64rem) {
+  .cta-band__inner {
+    grid-template-columns: 1.3fr 1fr;
+  }
+
+  .cta-band__actions {
+    justify-content: flex-end;
+  }
+}
+
+/* ---------- Visor de fotos ---------- */
+
+.lightbox {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgb(33 25 20 / 0.97);
+  color: var(--papel);
+}
+
+.lightbox[open] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.lightbox::backdrop {
+  background: rgb(33 25 20 / 0.6);
+}
+
+.lightbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: 0.75rem var(--gutter);
+}
+
+.lightbox__counter {
+  margin: 0;
+  color: rgb(253 252 247 / 0.8);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.06em;
+}
+
+.lightbox__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 0 clamp(0.75rem, 6vw, 6rem);
+}
+
+.lightbox__picture {
+  display: contents;
+}
+
+.lightbox__img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.lightbox__img.is-loaded {
+  opacity: 1;
+}
+
+.lightbox__caption {
+  margin: 0;
+  padding: 0.9rem var(--gutter) calc(1rem + env(safe-area-inset-bottom));
+  color: rgb(253 252 247 / 0.85);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.lightbox__btn {
+  display: inline-grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 1.5px solid rgb(253 252 247 / 0.35);
+  border-radius: 50%;
+  background: rgb(33 25 20 / 0.45);
+  color: var(--papel);
+  transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease);
+}
+
+.lightbox__btn:hover {
+  background: var(--papel);
+  color: var(--corteza);
+}
+
+.lightbox__btn:focus-visible {
+  outline-color: var(--sol);
+}
+
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+}
+
+.lightbox__prev {
+  left: var(--gutter);
+}
+
+.lightbox__next {
+  right: var(--gutter);
+}
+
+@media (max-width: 47.99rem) {
+  .lightbox__stage {
+    padding-bottom: 4.5rem;
+  }
+
+  .lightbox__prev,
+  .lightbox__next {
+    top: auto;
+    bottom: 0.5rem;
+    transform: none;
+  }
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+/* ---------- Mapa y dirección ---------- */
+
+.map-card {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.map-card__frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--linea);
+  border-radius: var(--radius-lg);
+  background: var(--blanco);
+  box-shadow: var(--sombra);
+}
+
+.map-card__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.map-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.address {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-block: var(--space-lg);
+  color: var(--corteza);
+  font-size: var(--fs-md);
+  line-height: 1.45;
+}
+
+.address .icon {
+  margin-top: 0.15rem;
+}
+
+.address__access {
+  color: var(--texto-suave);
+}
+
+/* ---------- Distancias ---------- */
+
+.distances {
+  margin-block: var(--space-lg);
+  border-top: 1px solid var(--linea-fuerte);
+}
+
+.distance {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--linea-fuerte);
+}
+
+.distance__icon {
+  color: var(--corteza);
+}
+
+.distance__name {
+  display: grid;
+  line-height: 1.3;
+}
+
+.distance__name small {
+  color: var(--texto-suave);
+  font-size: var(--fs-xs);
+}
+
+.distance__km {
+  color: var(--corteza);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- Cifras ---------- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+  gap: var(--space-lg) var(--space-xl);
+  width: 100%;
+}
+
+.stats li {
+  display: grid;
+  align-content: start;
+  gap: 0.25rem;
+}
+
+.stats strong {
+  color: var(--sol);
+  font-size: var(--fs-xl);
+  line-height: 1;
+}
+
+.stats span {
+  color: rgb(253 252 247 / 0.86);
+  font-size: var(--fs-sm);
+  line-height: 1.35;
+}
+
+.stats--light {
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  background: var(--sol);
+}
+
+.stats--light strong {
+  color: var(--corteza);
+}
+
+.stats--light span {
+  color: var(--texto-suave);
+}
+
+/* ---------- Beneficios: íconos en marcos redondeados con los colores del isotipo ---------- */
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--space-lg);
+}
+
+.benefit {
+  padding: var(--space-xl) var(--space-lg);
+  border: 1px solid var(--linea);
+  border-radius: var(--radius-lg);
+  background: var(--blanco);
+}
+
+.benefit__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 3.75rem;
+  height: 3.75rem;
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius);
+  background: var(--sol);
+  color: var(--corteza);
+}
+
+.benefit:nth-child(4n + 2) .benefit__icon {
+  background: var(--salvia);
+}
+
+.benefit:nth-child(4n + 3) .benefit__icon {
+  background: var(--cielo);
+}
+
+.benefit:nth-child(4n + 4) .benefit__icon {
+  background: var(--madera);
+}
+
+.benefit__title {
+  margin-bottom: 0.4rem;
+}
+
+.benefit p {
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+}
+
+@media (max-width: 39.99rem) {
+  .benefit {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: var(--space-md);
+    padding: var(--space-lg);
+  }
+
+  .benefit__icon {
+    grid-row: span 2;
+    width: 3.25rem;
+    height: 3.25rem;
+    margin-bottom: 0;
+  }
+}
+
+/* ---------- Tarjetas informativas ---------- */
+
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-lg);
+}
+
+.info-card {
+  padding: var(--space-xl);
+  border: 1px solid var(--linea);
+  border-radius: var(--radius-lg);
+  background: var(--blanco);
+}
+
+.section--white .info-card {
+  background: var(--papel);
+}
+
+.info-card__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: var(--space-md);
+  border-radius: 50%;
+  background: var(--cielo);
+  color: var(--corteza);
+}
+
+.section--cielo .info-card__icon {
+  background: var(--sol);
+}
+
+.info-card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.info-card p {
+  font-size: var(--fs-sm);
+}
+
+/* ---------- Destinos ---------- */
+
+.destinations {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
+  gap: var(--space-lg);
+}
+
+.destination {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--linea);
+  border-radius: var(--radius-lg);
+  background: var(--blanco);
+  color: var(--texto);
+}
+
+.destination__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.destination__media .photo {
+  height: 100%;
+}
+
+.destination--art .destination__media {
+  display: grid;
+  place-items: center;
+  background: var(--salvia);
+  color: var(--corteza);
+}
+
+.destination:nth-child(3n) .destination__media {
+  background-color: var(--cielo);
+}
+
+.destination:nth-child(3n + 2).destination--art .destination__media {
+  background-color: var(--sol);
+}
+
+.destination__art .icon {
+  width: 72px;
+  height: 72px;
+  stroke-width: 1.1;
+}
+
+.destination__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: var(--space-lg);
+}
+
+.destination__kicker {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.destination h3 {
+  color: var(--corteza);
+}
+
+.destination p {
+  font-size: var(--fs-sm);
+}
+
+.destination__distances {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: var(--space-sm);
+}
+
+.destination__distances li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--papel);
+  color: var(--corteza);
+  font-size: var(--fs-xs);
+}
+
+/* ---------- Testimonios ---------- */
+
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: var(--space-lg);
+}
+
+.testimonial figure {
+  display: grid;
+  align-content: start;
+  gap: var(--space-md);
+  height: 100%;
+  margin: 0;
+  padding: var(--space-xl);
+  border: 1px solid var(--linea);
+  border-radius: var(--radius-lg);
+  background: var(--blanco);
+}
+
+.testimonial__quote {
+  color: var(--madera);
+}
+
+.testimonial blockquote {
+  margin: 0;
+  color: var(--corteza);
+  font-size: var(--fs-md);
+  font-style: italic;
+}
+
+.testimonial figcaption {
+  display: grid;
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+}
+
+.testimonial figcaption strong {
+  color: var(--corteza);
+}
+
+/* ---------- Contacto ---------- */
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: var(--space-lg);
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: var(--space-xl);
+  border: 1px solid var(--linea);
+  border-radius: var(--radius-lg);
+  background: var(--blanco);
+}
+
+.contact-card__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--sol);
+  color: var(--corteza);
+}
+
+.contact-card__title {
+  font-size: var(--fs-md);
+}
+
+.contact-card .address {
+  margin-block: 0;
+  font-size: var(--fs-base);
+}
+
+.contact-card__value {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.contact-card__value a {
+  color: var(--corteza);
+  text-decoration: none;
+}
+
+.contact-card > .btn {
+  margin-top: auto;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.95rem;
+  border: 1.5px solid var(--linea-fuerte);
+  border-radius: var(--radius-pill);
+  color: var(--corteza);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  border-color: var(--corteza);
+}
+
+.contact-business {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  max-width: 48rem;
+  margin: var(--space-2xl) 0 0;
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+}
+
+.plain-list {
+  display: grid;
+  gap: 0.3rem;
+}
+
+/* ---------- Pasos y lista rápida de cabañas (reserva) ---------- */
+
+.steps {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--space-md);
+}
+
+.step__num {
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--corteza);
+  color: var(--papel);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.step strong {
+  display: block;
+  color: var(--corteza);
+}
+
+.step p {
+  margin: 0.2rem 0 0;
+  color: var(--texto-suave);
+  font-size: var(--fs-sm);
+}
+
+.mini-cabins a {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--linea);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+}
+
+.mini-cabins a span:first-child {
+  color: var(--corteza);
+  font-weight: 700;
+}
+
+.mini-cabins a span:last-child {
+  color: var(--texto-suave);
+  text-align: right;
+}
+
+.mini-cabins a:hover span:first-child {
+  text-decoration: underline;
+}
+
+/* ---------- Navegación entre cabañas ---------- */
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--linea);
+}
+
+.pager__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--corteza);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pager__link small {
+  display: block;
+  color: var(--texto-suave);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+}
+
+.pager__link--next {
+  text-align: right;
+}
+
+.pager__link .icon {
+  transition: transform var(--duration) var(--ease);
+}
+
+.pager__link:hover .icon {
+  transform: translateX(-3px);
+}
+
+.pager__link--next:hover .icon {
+  transform: translateX(3px);
+}
+
+/* ---------- Créditos ---------- */
+
+.credits-block {
+  max-width: var(--container-text);
+}
+
+.credits-block__title {
+  margin-bottom: var(--space-sm);
+  font-size: var(--fs-md);
+}
+
+.credits {
+  display: grid;
+  gap: 0.4rem;
+  margin-block: var(--space-md);
+  color: var(--texto-suave);
+  font-size: var(--fs-xs);
+}
