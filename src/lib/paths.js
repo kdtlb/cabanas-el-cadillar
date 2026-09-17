@@ -20,7 +20,8 @@ export function applyBasePath(html) {
   return html
     .replace(/(\s(?:href|src|action|data-avif)=")(\/(?!\/)[^"]*)"/g, (match, attribute, url) => `${attribute}${withBase(url)}"`)
     .replace(/(\s(?:srcset|imagesrcset)=")([^"]+)"/g, (match, attribute, list) => {
-      const candidates = list.split(',').map((candidate) => {
+      // Las candidatas van separadas por ", " (una coma sola puede ser parte de una URL data:)
+      const candidates = list.split(/\s*,\s+/).map((candidate) => {
         const [url, ...descriptors] = candidate.trim().split(/\s+/);
         return [withBase(url), ...descriptors].join(' ');
       });

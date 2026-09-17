@@ -111,7 +111,7 @@ function inspect(page, html) {
   const refs = new Set();
   for (const match of html.matchAll(/\s(?:href|src|action)="(\/(?!\/)[^"]*)"/g)) refs.add(match[1]);
   for (const match of html.matchAll(/\s(?:srcset|imagesrcset)="([^"]+)"/g)) {
-    for (const candidate of match[1].split(',')) {
+    for (const candidate of match[1].split(/\s*,\s+/)) {
       const url = candidate.trim().split(/\s+/)[0];
       if (url.startsWith('/') && !url.startsWith('//')) refs.add(url);
     }

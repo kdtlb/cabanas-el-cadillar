@@ -33,6 +33,9 @@ import { html } from '../lib/html.js';
 
 const HERO_PHOTO = 'exterior-cabanas-arbol-florido';
 const HERO_SIZES = '100vw';
+// En celulares la portada va sin foto (fondo negro): ni se precarga ni se descarga
+const HERO_PHOTO_MEDIA = '(min-width: 48rem)';
+const HERO_NO_PHOTO_MEDIA = '(max-width: 47.99rem)';
 
 const linkArrow = (href, label) => html`<a class="link-arrow" href="${href}"><span>${label}</span>${icon('arrow-right', { size: 20 })}</a>`;
 
@@ -43,7 +46,7 @@ export function homePage(ctx) {
   const guestOptions = [...new Set(cabins.map((cabin) => cabin.guests))].sort((a, b) => a - b);
 
   const hero = html`<section class="hero" aria-labelledby="hero-titulo">
-  <div class="hero__media">${picture(ctx, HERO_PHOTO, { priority: true, sizes: HERO_SIZES })}</div>
+  <div class="hero__media">${picture(ctx, HERO_PHOTO, { priority: true, sizes: HERO_SIZES, skipMedia: HERO_NO_PHOTO_MEDIA })}</div>
   <div class="hero__inner">
     <div class="hero__content">
       <p class="hero__eyebrow"><span>${c.hero.eyebrow}</span></p>
@@ -187,7 +190,7 @@ ${mosaic(ctx, ['piscina-valle', 'quincho-mesa-larga', 'cabana-3-galeria-lavandas
     title: content.seo.home.title,
     description: content.seo.home.description,
     image: HERO_PHOTO,
-    preload: { photo: HERO_PHOTO, sizes: HERO_SIZES },
+    preload: { photo: HERO_PHOTO, sizes: HERO_SIZES, media: HERO_PHOTO_MEDIA },
     bodyClass: 'page-home',
     headerOverlay: true,
     jsonLd: [website(ctx), lodgingBusiness(ctx)],

@@ -49,7 +49,7 @@ export function renderDocument(ctx, page) {
   const preload = page.preload
     ? (() => {
         const hero = ctx.images.get(page.preload.photo);
-        return html`<link rel="preload" as="image" type="image/avif" imagesrcset="${ctx.images.srcset(hero, 'avif')}" imagesizes="${page.preload.sizes}" fetchpriority="high">`;
+        return html`<link rel="preload" as="image" type="image/avif" imagesrcset="${ctx.images.srcset(hero, 'avif')}" imagesizes="${page.preload.sizes}"${attrs({ media: page.preload.media })} fetchpriority="high">`;
       })()
     : '';
 

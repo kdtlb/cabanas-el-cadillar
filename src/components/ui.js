@@ -26,9 +26,12 @@ export function sectionHead({ eyebrow: label, number = null, title, lead = null,
   </header>`;
 }
 
-export function picture(ctx, id, { sizes = '100vw', priority = false, className = '', alt = null } = {}) {
+// Imagen de 1 px: con `skipMedia`, el navegador no descarga la foto en las pantallas donde no se muestra
+const BLANK_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+export function picture(ctx, id, { sizes = '100vw', priority = false, className = '', alt = null, skipMedia = null } = {}) {
   const photo = ctx.images.get(id);
-  return html`<picture class="${cx('photo', className)}"><source type="image/avif" srcset="${ctx.images.srcset(photo, 'avif')}" sizes="${sizes}"><img src="${ctx.images.url(photo, 800)}" srcset="${ctx.images.srcset(photo, 'webp')}" sizes="${sizes}" width="${photo.width}" height="${photo.height}" alt="${alt ?? ctx.pick(photo.alt)}"${attrs({
+  return html`<picture class="${cx('photo', className)}">${skipMedia ? html`<source media="${skipMedia}" srcset="${BLANK_IMAGE}">` : ''}<source type="image/avif" srcset="${ctx.images.srcset(photo, 'avif')}" sizes="${sizes}"><img src="${ctx.images.url(photo, 800)}" srcset="${ctx.images.srcset(photo, 'webp')}" sizes="${sizes}" width="${photo.width}" height="${photo.height}" alt="${alt ?? ctx.pick(photo.alt)}"${attrs({
     loading: priority ? 'eager' : 'lazy',
     decoding: priority ? null : 'async',
     fetchpriority: priority ? 'high' : null,

@@ -130,6 +130,24 @@
   margin-top: var(--space-xl);
 }
 
+/* En celulares, portada despejada: fondo negro con el nombre y la bienvenida.
+   La reserva queda en la barra inferior. */
+@media (max-width: 47.99rem) {
+  .hero {
+    align-items: center;
+    min-height: 70vh;
+    min-height: 70svh;
+    background: #110d0b;
+  }
+
+  .hero::before,
+  .hero__media,
+  .hero__lead,
+  .hero__actions {
+    display: none;
+  }
+}
+
 @media (min-width: 48rem) {
   .hero {
     min-height: 100vh;
