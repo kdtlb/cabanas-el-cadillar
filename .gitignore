@@ -2,6 +2,7 @@
 # Las versiones optimizadas que usa el sitio están en public/img y public/marca.
 DISEÑO/
 Imagenes/
+imagenes_mejoradas/
 
 # Resultado de la compilación (se genera con `npm run build`)
 dist/
