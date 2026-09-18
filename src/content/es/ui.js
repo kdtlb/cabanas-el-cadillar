@@ -37,7 +37,7 @@ export default {
   whatsappDefault: 'Hola, quisiera consultar disponibilidad para hospedarme en El Cadillar.',
   cabin: {
     guests: { one: '{n} persona', other: 'Hasta {n} personas' },
-    guestsFor: { one: 'Para {n} persona', other: 'Para {n} personas' },
+    guestsFor: { one: 'Hasta {n} persona', other: 'Hasta {n} personas' },
     bathrooms: { one: '{n} baño', other: '{n} baños' },
     area: '{n} m²',
     levels: { one: 'Una planta', other: '{n} plantas' },
@@ -51,7 +51,7 @@ export default {
     whatsappMessage: 'Hola, quisiera consultar disponibilidad de la {name} en El Cadillar.',
     filterLabel: 'Filtrar cabañas por capacidad',
     filterAll: 'Todas',
-    filterGuests: 'Para {n}',
+    filterGuests: 'Hasta {n}',
   },
   gallery: {
     filterLabel: 'Filtrar fotos por espacio',

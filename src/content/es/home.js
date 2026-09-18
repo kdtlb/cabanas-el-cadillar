@@ -11,7 +11,6 @@ export default {
     eyebrow: 'El Cadillar Apart Hotel · Tarija, Bolivia',
     title: 'Tu casa lejos de casa',
     titleAccent: 'al pie de los cerros de Tarija',
-    lead: 'Pasa, ponte a gusto. Te esperan cabañas entre jardines, una piscina para las tardes de sol y la calma del campo, a solo 7 km de la ciudad: todo para que llegar a Tarija se sienta como volver a casa.',
     facts: [
       { icon: 'house', text: '10 cabañas de todo tamaño' },
       { icon: 'pool', text: 'Piscina y quincho' },

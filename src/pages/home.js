@@ -51,7 +51,6 @@ export function homePage(ctx) {
     <div class="hero__content">
       <p class="hero__eyebrow"><span>${c.hero.eyebrow}</span></p>
       <h1 id="hero-titulo">${c.hero.title} <span class="hero__title-accent">${c.hero.titleAccent}</span></h1>
-      <p class="hero__lead">${c.hero.lead}</p>
       <div class="hero__actions">
         ${button({ href: booking, label: t('actions.book'), variant: 'sun', size: 'lg', iconName: 'calendar', external: isExternal(booking), track: 'reservar_hero' })}
         ${button({ href: '#cabanas', label: t('actions.seeCabins'), variant: 'outline-light', size: 'lg', iconName: 'house' })}

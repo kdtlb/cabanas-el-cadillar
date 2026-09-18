@@ -115,19 +115,11 @@
   letter-spacing: 0;
 }
 
-.hero__lead {
-  max-width: 36rem;
-  margin: var(--space-lg) 0 0;
-  color: rgb(253 252 247 / 0.94);
-  font-size: var(--fs-md);
-  text-shadow: 0 1px 16px rgb(33 25 20 / 0.45);
-}
-
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: var(--space-xl);
+  margin-top: var(--space-2xl);
 }
 
 /* En celulares, portada despejada: fondo negro con el nombre y la bienvenida.
@@ -142,7 +134,6 @@
 
   .hero::before,
   .hero__media,
-  .hero__lead,
   .hero__actions {
     display: none;
   }
