@@ -11,7 +11,7 @@ export default {
   cabins: {
     title: 'Cabins in Tarija | El Cadillar Apart Hotel',
     description:
-      'Compare the 10 cabins at El Cadillar in Tarija, Bolivia: photos, beds, size and what each one offers, for 3, 4 or 5 guests. Check availability on WhatsApp.',
+      'Compare the 10 cabins at El Cadillar in Tarija, Bolivia: photos, beds, size and what each one offers, for 1 to 5 guests. Check availability on WhatsApp.',
   },
   cabin: {
     title: '{name} for {guests} guests in Tarija | El Cadillar Apart Hotel',

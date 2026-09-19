@@ -11,7 +11,7 @@ export default {
   cabins: {
     eyebrow: 'Where to stay in Tarija',
     title: 'Cabins in Tarija',
-    lead: 'Ten independent cabins at El Cadillar, of every size, 7 km from the centre of Tarija. Compare capacity, beds and size, and choose yours.',
+    lead: 'Ten independent cabins at El Cadillar, for 1 to 5 guests, 7 km from the centre of Tarija. Compare capacity, beds and size, and choose yours.',
     listTitle: 'Choose your cabin',
     compare: {
       eyebrow: 'Compare',

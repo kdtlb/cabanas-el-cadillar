@@ -152,7 +152,6 @@ Estos datos no estaban en el material y el sitio no los inventa (quedan ocultos 
 - Horarios de check-in y check-out, qué incluye la estadía, mascotas, estacionamiento, WiFi y precios.
 - Cabaña 1: las camas suman 6 plazas y la capacidad es de 5 personas; no se ve cocina en las fotos.
 - Cabaña 3: confirmar el tipo de cama "triple"; no se ve cocina en las fotos.
-- Cabaña 6: recibe hasta 3 personas, pero solo figura una cama doble.
 - Cabaña 10: figura con 20 m² y tiene dos plantas.
 - Zona de hamacas: no hay fotos ni videos que la muestren, por eso no aparece.
 - Salón empresarial (`src/data/business.js`): confirmados 90 m², capacidad para 45 personas,

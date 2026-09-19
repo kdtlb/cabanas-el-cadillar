@@ -329,7 +329,7 @@ export const cabins = [
         'A cozinha compacta tem pia, micro-ondas e chaleira elétrica, e o banheiro é privativo.',
       ],
     },
-    guests: 3,
+    guests: 2,
     beds: [{ type: 'doble', count: 1 }],
     bathrooms: 1,
     area: 21,
@@ -340,7 +340,6 @@ export const cabins = [
     price: null,
     availability: null,
     bookingUrl: null,
-    pending: ['Confirmar la cama para la tercera persona: solo figura una cama doble.'],
   },
   {
     id: 'cabana-7',

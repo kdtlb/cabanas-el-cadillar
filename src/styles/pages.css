@@ -16,11 +16,13 @@
   position: relative;
   isolation: isolate;
   display: grid;
-  align-items: end;
-  /* En celulares la foto deja asomar los datos por encima de la barra de reserva */
-  min-height: calc(100vh - 7rem);
-  min-height: calc(100svh - 7rem);
-  padding: calc(var(--header-h) + var(--space-2xl)) 0 clamp(6rem, 4.5rem + 6vw, 9.5rem);
+  /* Toda la pantalla: la bienvenida al centro y la franja de datos abajo del todo */
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: calc(var(--header-h) + var(--space-md)) 0 0;
   overflow: hidden;
   background: var(--corteza);
   color: var(--papel);
@@ -68,7 +70,8 @@
 }
 
 .hero__content {
-  max-width: 46rem;
+  max-width: 56rem;
+  margin-inline: auto;
 }
 
 .hero__eyebrow {
@@ -99,9 +102,11 @@
 
 .hero h1 {
   color: var(--papel);
-  font-size: clamp(2.6rem, 1.55rem + 4.4vw, 5.5rem);
-  line-height: 1.02;
+  /* Tamaño y reparto pensados para que el título caiga en dos líneas parejas */
+  font-size: clamp(2.4rem, 1.6rem + 3.6vw, 4.8rem);
+  line-height: 1.05;
   text-shadow: 0 2px 28px rgb(33 25 20 / 0.35);
+  text-wrap: balance;
 }
 
 .hero__title-accent {
@@ -118,12 +123,14 @@
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.75rem;
   margin-top: var(--space-2xl);
 }
 
-/* El fondo de marca (sol y cerros del isotipo) es solo para celulares */
-.hero__backdrop {
+/* El fondo de marca (sol y cerros del isotipo) y el logotipo a color son solo para celulares */
+.hero__backdrop,
+.hero__logo {
   display: none;
 }
 
@@ -132,8 +139,8 @@
 @media (max-width: 47.99rem) {
   .hero {
     align-items: center;
-    min-height: 70vh;
-    min-height: 70svh;
+    /* La barra de reserva es fija: se le deja su sitio para que no tape la franja */
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
     background: linear-gradient(180deg, #100c0a 0%, #191210 55%, #20170f 100%);
   }
 
@@ -176,40 +183,53 @@
 
   .hero::before,
   .hero__media,
-  .hero__actions {
+  .hero__actions,
+  .hero__eyebrow {
     display: none;
+  }
+
+  /* El logotipo a color reemplaza a la etiqueta de texto, sobre una placa clara para que se lea */
+  .hero__logo {
+    display: block;
+    width: min(13rem, 52vw);
+    height: auto;
+    margin: 0 auto var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-lg);
+    background: var(--papel);
+    box-shadow: var(--sombra);
+  }
+
+  /* Sin el logotipo de línea blanca del encabezado: el de la portada ya lo dice.
+     Al hacer scroll el encabezado vuelve a su fondo crema y el logotipo reaparece. */
+  .js .page-home .site-header--overlay:not(.is-scrolled):not(.is-open) .site-header__brand {
+    visibility: hidden;
   }
 }
 
 @media (min-width: 48rem) {
-  .hero {
-    min-height: 100vh;
-    min-height: 100svh;
-  }
-
-  /* El texto va a la izquierda: el velo se concentra de ese lado */
+  /* El texto va centrado: el velo se concentra en el medio de la foto */
   .hero::before {
     background:
       linear-gradient(180deg, rgb(33 25 20 / 0.5) 0%, rgb(33 25 20 / 0) 26%),
-      linear-gradient(90deg, rgb(33 25 20 / 0.7) 0%, rgb(33 25 20 / 0.42) 40%, rgb(33 25 20 / 0) 70%),
-      linear-gradient(0deg, rgb(33 25 20 / 0.6) 0%, rgb(33 25 20 / 0) 45%);
+      linear-gradient(0deg, rgb(33 25 20 / 0.55) 0%, rgb(33 25 20 / 0) 45%),
+      radial-gradient(ellipse 70% 60% at 50% 45%, rgb(33 25 20 / 0.6) 0%, rgb(33 25 20 / 0.25) 55%, rgb(33 25 20 / 0) 100%);
   }
 }
 
-/* Franja de datos que flota sobre el borde inferior de la foto */
+/* Franja de datos de lado a lado, apoyada en el borde inferior de la portada */
 .hero-facts {
   position: relative;
   z-index: 2;
-  width: min(100% - 2 * var(--gutter), var(--container));
-  margin: calc(-1 * clamp(3.5rem, 2.5rem + 3vw, 5rem)) auto 0;
+  align-self: end;
+  width: 100%;
 }
 
 .hero-facts__list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-md);
-  padding: var(--space-md);
-  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--gutter);
   background: var(--papel);
   box-shadow: var(--sombra);
 }
@@ -236,7 +256,7 @@
 @media (min-width: 40rem) {
   .hero-facts__list {
     gap: var(--space-md) var(--space-lg);
-    padding: var(--space-lg);
+    padding: var(--space-lg) var(--gutter);
   }
 
   .hero-facts__list li {
@@ -251,11 +271,32 @@
   }
 }
 
+/* En celular la franja es una tarjeta redondeada, con aire a los lados y sobre la barra */
+@media (max-width: 47.99rem) {
+  .hero-facts {
+    width: min(100% - 2 * var(--gutter), var(--container));
+    margin: 0 auto var(--space-md);
+  }
+
+  .hero-facts__list {
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+  }
+}
+
+/* En computadora los datos se alinean con el ancho del contenido */
+@media (min-width: 48rem) {
+  .hero-facts__list {
+    padding: var(--space-lg) max(var(--gutter), calc((100% - var(--container)) / 2));
+    border-radius: 0;
+  }
+}
+
 @media (min-width: 64rem) {
+  /* Los cuatro datos entran en una sola fila */
   .hero-facts__list {
     grid-template-columns: repeat(4, auto);
     justify-content: space-between;
-    padding: var(--space-lg) clamp(1.5rem, -2rem + 5vw, 3rem);
   }
 }
 

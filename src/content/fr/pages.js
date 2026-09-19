@@ -11,7 +11,7 @@ export default {
   cabins: {
     eyebrow: 'Où loger à Tarija',
     title: 'Chalets à Tarija',
-    lead: "Dix chalets indépendants à El Cadillar, de toutes tailles, à 7 km du centre de Tarija. Comparez la capacité, les lits et la surface, et choisissez le vôtre.",
+    lead: "Dix chalets indépendants à El Cadillar, de 1 à 5 personnes, à 7 km du centre de Tarija. Comparez la capacité, les lits et la surface, et choisissez le vôtre.",
     listTitle: 'Choisissez votre chalet',
     compare: {
       eyebrow: 'Comparer',

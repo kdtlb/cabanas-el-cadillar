@@ -11,7 +11,7 @@ export default {
   cabins: {
     eyebrow: 'Alojamiento en Tarija',
     title: 'Cabañas en Tarija',
-    lead: 'Diez cabañas independientes en El Cadillar, para 3, 4 o 5 personas, a 7 km del centro de Tarija. Compara capacidad, camas y superficie, y elige la tuya.',
+    lead: 'Diez cabañas independientes en El Cadillar, desde 1 hasta 5 personas, a 7 km del centro de Tarija. Compara capacidad, camas y superficie, y elige la tuya.',
     listTitle: 'Elige tu cabaña',
     compare: {
       eyebrow: 'Comparar',

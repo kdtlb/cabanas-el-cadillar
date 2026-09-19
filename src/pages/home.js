@@ -50,6 +50,7 @@ export function homePage(ctx) {
   <div class="hero__backdrop" aria-hidden="true"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMax slice" focusable="false"><path class="hero__hill hero__hill--back" d="M0 200V88c44-28 74 10 120-6s70-50 114-42 82 56 166 38v122Z"/><path class="hero__hill hero__hill--front" d="M0 200v-52c50-24 88 18 134 6s74-38 116-28 84 42 150 28v46Z"/></svg></div>
   <div class="hero__inner">
     <div class="hero__content">
+      <img class="hero__logo" src="/marca/logo-vertical.svg" alt="${ctx.site.name}" width="1564" height="1871">
       <p class="hero__eyebrow"><span>${c.hero.eyebrow}</span></p>
       <h1 id="hero-titulo">${c.hero.title} <span class="hero__title-accent">${c.hero.titleAccent}</span></h1>
       <div class="hero__actions">
@@ -58,10 +59,10 @@ export function homePage(ctx) {
       </div>
     </div>
   </div>
-</section>
-<div class="hero-facts">
-  <ul class="hero-facts__list">${c.hero.facts.map((fact) => html`<li>${icon(fact.icon, { size: 24 })}<span>${fact.text}</span></li>`)}</ul>
-</div>`;
+  <div class="hero-facts">
+    <ul class="hero-facts__list">${c.hero.facts.map((fact) => html`<li>${icon(fact.icon, { size: 24 })}<span>${fact.text}</span></li>`)}</ul>
+  </div>
+</section>`;
 
   const intro = section({
     id: 'descubre',

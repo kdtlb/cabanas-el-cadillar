@@ -11,7 +11,7 @@ export default {
   cabins: {
     title: 'Chalets à Tarija | El Cadillar Apart Hotel',
     description:
-      "Comparez les 10 chalets d'El Cadillar à Tarija, en Bolivie : photos, lits, surface et équipements, pour 3, 4 ou 5 personnes. Disponibilités sur WhatsApp.",
+      "Comparez les 10 chalets d'El Cadillar à Tarija, en Bolivie : photos, lits, surface et équipements, pour 1 à 5 personnes. Disponibilités sur WhatsApp.",
   },
   cabin: {
     title: '{name} pour {guests} personnes à Tarija | El Cadillar',

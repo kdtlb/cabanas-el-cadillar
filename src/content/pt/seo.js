@@ -11,7 +11,7 @@ export default {
   cabins: {
     title: 'Cabanas em Tarija | El Cadillar Apart Hotel',
     description:
-      'Compare as 10 cabanas do El Cadillar em Tarija, na Bolívia: fotos, camas, área e o que cada uma oferece, para 3, 4 ou 5 pessoas. Consulte pelo WhatsApp.',
+      'Compare as 10 cabanas do El Cadillar em Tarija, na Bolívia: fotos, camas, área e o que cada uma oferece, para 1 a 5 pessoas. Consulte pelo WhatsApp.',
   },
   cabin: {
     title: '{name} para {guests} pessoas em Tarija | El Cadillar',
