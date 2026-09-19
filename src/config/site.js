@@ -15,7 +15,7 @@ export const site = {
   // Nombre con el que figura en redes (instagram.com/cabanasdelcadillar).
   alternateName: 'Cabañas del Cadillar',
   // Frase de la tarjeta de presentación del manual de marca.
-  tagline: { es: 'Naturaleza y descanso' },
+  tagline: { es: 'Naturaleza y descanso', en: 'Nature and rest', fr: 'Nature et repos', pt: 'Natureza e descanso' },
 
   // Dirección pública y carpeta de publicación. Al compilar se pueden cambiar con
   // las variables SITE_URL y BASE_PATH: el flujo de GitHub Actions publica en
@@ -27,10 +27,12 @@ export const site = {
   basePath: (process.env.BASE_PATH || '').replace(/^\/+|\/+$/g, '').replace(/^(?=.)/, '/'),
 
   defaultLocale: 'es',
+  // El español es el idioma principal; los demás cuelgan de /en/, /fr/ y /pt/.
   locales: {
     es: { enabled: true, lang: 'es', ogLocale: 'es_BO', label: 'Español' },
-    // Activar solo cuando exista una traducción revisada (no automática).
-    en: { enabled: false, lang: 'en', ogLocale: 'en_US', label: 'English' },
+    en: { enabled: true, lang: 'en', ogLocale: 'en_US', label: 'English' },
+    fr: { enabled: true, lang: 'fr', ogLocale: 'fr_FR', label: 'Français' },
+    pt: { enabled: true, lang: 'pt', ogLocale: 'pt_BR', label: 'Português' },
   },
 
   contact: {
@@ -57,7 +59,7 @@ export const site = {
     municipality: 'San Lorenzo',
     region: 'Tarija',
     country: 'BO',
-    countryName: { es: 'Bolivia' },
+    countryName: { es: 'Bolivia', en: 'Bolivia', fr: 'Bolivie', pt: 'Bolívia' },
     geo: { lat: -21.499031775530792, lng: -64.77102580573317 },
   },
 
@@ -88,9 +90,13 @@ export const whatsappUrl = (message) =>
 export const mapsUrls = (() => {
   const { lat, lng } = site.location.geo;
   const point = `${lat},${lng}`;
+  // El mapa incrustado busca la ficha del lugar en Google ("Cabañas del Cadillar"),
+  // porque así muestra la marca con el nombre; con las coordenadas solas no aparece
+  // ninguna marca. Los enlaces para llegar sí usan las coordenadas, que son exactas.
+  const ficha = encodeURIComponent(`${site.alternateName} ${site.location.region}`);
   return {
     place: `https://www.google.com/maps/search/?api=1&query=${point}`,
     directions: `https://www.google.com/maps/dir/?api=1&destination=${point}`,
-    embed: `https://www.google.com/maps?q=${point}&z=14&hl=es&output=embed`,
+    embed: `https://www.google.com/maps?q=${ficha}&z=15&hl=es&output=embed`,
   };
 })();

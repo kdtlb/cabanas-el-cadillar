@@ -32,11 +32,12 @@ src/
     site.js         Nombre, dominio, contacto, redes, ubicación, reservas y analítica
     routes.js       URLs por idioma y menú principal
   content/
-    es.js           Punto de entrada de los textos en español
+    es.js · en.js · fr.js · pt.js   Punto de entrada de los textos de cada idioma
     es/ui.js        Textos de interfaz (botones, menú, etiquetas)
     es/seo.js       Títulos y descripciones para buscadores
     es/home.js      Textos de la portada
     es/pages.js     Textos de las páginas interiores
+    en/ · fr/ · pt/ Los mismos cuatro archivos, traducidos
   data/
     cabins.js       Las 10 cabañas (capacidad, camas, m², equipamiento, fotos)
     amenities.js    Catálogo de características y espacios compartidos
@@ -132,8 +133,10 @@ El sitio se publica en **https://kdtlb.github.io/cabanas-el-cadillar/**.
   todos los botones "Reservar" apuntan al motor.
 - **Analítica y campañas:** IDs de Google Analytics 4, Tag Manager, píxel de Meta y verificación de
   Search Console en `site.js`. Los botones clave ya envían eventos (`data-track`).
-- **Inglés:** copiar `src/content/es/` como `en/`, traducir, sumar `en` en los datos y activar
-  `locales.en` en `site.js`. Las rutas en inglés ya están definidas en `routes.js`.
+- **Más idiomas:** el sitio se publica en español, inglés, francés y portugués. Para sumar otro,
+  copiar `src/content/es/` con el código del idioma, traducirlo, registrarlo en
+  `src/content/index.js`, agregar sus rutas en `routes.js`, activarlo en `locales` (`site.js`) y
+  sumar la clave del idioma en los datos (cabañas, fotos, preguntas, destinos).
 - **Precios, disponibilidad, promociones o blog:** los datos y el compilador admiten nuevas páginas
   y campos sin rehacer el sitio.
 
@@ -152,9 +155,9 @@ Estos datos no estaban en el material y el sitio no los inventa (quedan ocultos 
 - Cabaña 6: recibe hasta 3 personas, pero solo figura una cama doble.
 - Cabaña 10: figura con 20 m² y tiene dos plantas.
 - Zona de hamacas: no hay fotos ni videos que la muestren, por eso no aparece.
-- Salón empresarial (`src/data/business.js`): por pedido del propietario, la página muestra **XX**
-  donde falta el dato (capacidad, superficie, formatos de armado, equipamiento, internet,
-  estacionamiento, horarios, tarifas, opciones de aperitivos y menús). Faltan fotos del interior.
+- Salón empresarial (`src/data/business.js`): confirmados 90 m², capacidad para 45 personas,
+  internet y estacionamiento. Queda como **XX** solo las opciones de aperitivos, y faltan fotos
+  del interior del salón.
 - Ubicación: el sitio indica "Cadillar, municipio de San Lorenzo" según OpenStreetMap para las
   coordenadas del predio, y 10 km por carretera al aeropuerto (antes figuraba "30 minutos").
 - Testimonios reales de huéspedes.

@@ -10,6 +10,7 @@
 import { mainNav } from '../config/routes.js';
 import { attrs, cx, html } from '../lib/html.js';
 import { icon } from './icons.js';
+import { languageLinks, languageMenu } from './language.js';
 import { bookingHref, isExternal } from './ui.js';
 
 export function siteHeader(ctx, page) {
@@ -31,10 +32,12 @@ export function siteHeader(ctx, page) {
     <nav class="site-nav" id="menu" aria-label="${t('nav.label')}" data-nav>
       <ul class="site-nav__list">${links}</ul>
       <div class="site-nav__extra">
+        ${languageLinks(ctx, page, 'lang-links--menu')}
         <a class="btn btn--primary" href="${booking}" data-track="reservar_menu"${attrs({ target: external ? '_blank' : null, rel: external ? 'noopener' : null })}>${icon('calendar', { size: 20 })}<span>${t('actions.checkAvailability')}</span></a>
         <a class="btn btn--ghost" href="${whatsapp}" target="_blank" rel="noopener" data-track="whatsapp_menu">${icon('whatsapp', { size: 20 })}<span>${t('actions.whatsapp')}</span></a>
       </div>
     </nav>
+    ${languageMenu(ctx, page)}
     <a class="btn btn--primary site-header__cta" href="${booking}" data-track="reservar_header"${attrs({ target: external ? '_blank' : null, rel: external ? 'noopener' : null })}><span>${t('actions.book')}</span></a>
     <button class="site-header__toggle" type="button" aria-controls="menu" aria-expanded="false" data-nav-toggle data-label-open="${t('nav.open')}" data-label-close="${t('nav.close')}">
       <span class="sr-only" data-nav-toggle-label>${t('nav.open')}</span>

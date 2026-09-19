@@ -6,14 +6,14 @@
  * Las categorías filtran por la primera coincidencia en "tags" de cada foto.
  */
 export const galleryCategories = [
-  { id: 'todas', label: { es: 'Todas' } },
-  { id: 'exteriores', label: { es: 'Exteriores' } },
-  { id: 'cabanas', label: { es: 'Cabañas' } },
-  { id: 'piscina', label: { es: 'Piscina' } },
-  { id: 'quincho', label: { es: 'Quincho' } },
-  { id: 'areas-sociales', label: { es: 'Áreas sociales' } },
-  { id: 'jardines', label: { es: 'Jardines' } },
-  { id: 'detalles', label: { es: 'Detalles' } },
+  { id: 'todas', label: { es: 'Todas', en: 'All', fr: 'Toutes', pt: 'Todas' } },
+  { id: 'exteriores', label: { es: 'Exteriores', en: 'Outdoors', fr: 'Extérieurs', pt: 'Externos' } },
+  { id: 'cabanas', label: { es: 'Cabañas', en: 'Cabins', fr: 'Chalets', pt: 'Cabanas' } },
+  { id: 'piscina', label: { es: 'Piscina', en: 'Pool', fr: 'Piscine', pt: 'Piscina' } },
+  { id: 'quincho', label: { es: 'Quincho', en: 'Barbecue house', fr: 'Espace barbecue', pt: 'Churrasco' } },
+  { id: 'areas-sociales', label: { es: 'Áreas sociales', en: 'Shared areas', fr: 'Espaces communs', pt: 'Áreas sociais' } },
+  { id: 'jardines', label: { es: 'Jardines', en: 'Gardens', fr: 'Jardins', pt: 'Jardins' } },
+  { id: 'detalles', label: { es: 'Detalles', en: 'Details', fr: 'Détails', pt: 'Detalhes' } },
 ];
 
 export const galleryOrder = [

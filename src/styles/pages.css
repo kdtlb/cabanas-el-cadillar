@@ -122,14 +122,56 @@
   margin-top: var(--space-2xl);
 }
 
-/* En celulares, portada despejada: fondo negro con el nombre y la bienvenida.
-   La reserva queda en la barra inferior. */
+/* El fondo de marca (sol y cerros del isotipo) es solo para celulares */
+.hero__backdrop {
+  display: none;
+}
+
+/* En celulares, portada despejada: sin foto ni botones, con el nombre y la
+   bienvenida sobre el fondo de marca. La reserva queda en la barra inferior. */
 @media (max-width: 47.99rem) {
   .hero {
     align-items: center;
     min-height: 70vh;
     min-height: 70svh;
-    background: #110d0b;
+    background: linear-gradient(180deg, #100c0a 0%, #191210 55%, #20170f 100%);
+  }
+
+  .hero__backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    display: block;
+    overflow: hidden;
+  }
+
+  /* Resplandor del sol, arriba a la derecha como en el isotipo */
+  .hero__backdrop::before {
+    content: "";
+    position: absolute;
+    top: -7rem;
+    right: -6rem;
+    width: 24rem;
+    height: 24rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(250 237 175 / 0.22), rgb(250 237 175 / 0) 70%);
+  }
+
+  .hero__backdrop svg {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+  }
+
+  .hero__hill--back {
+    fill: #2a1f18;
+  }
+
+  .hero__hill--front {
+    fill: #3a2b21;
   }
 
   .hero::before,

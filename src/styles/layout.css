@@ -314,6 +314,110 @@ body.menu-open {
   overflow: hidden;
 }
 
+/* ---------- Selector de idioma ---------- */
+
+.lang {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.lang > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-pill);
+  color: var(--corteza);
+  font-size: var(--fs-sm);
+  list-style: none;
+  cursor: pointer;
+}
+
+.lang > summary::-webkit-details-marker {
+  display: none;
+}
+
+.lang > summary:hover,
+.lang[open] > summary {
+  background: rgb(97 72 58 / 0.08);
+}
+
+.lang__list {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  z-index: 5;
+  display: grid;
+  min-width: 9rem;
+  padding: 0.4rem;
+  border: 1px solid var(--linea);
+  border-radius: var(--radius-sm);
+  background: var(--papel);
+  box-shadow: var(--sombra);
+}
+
+.lang-links a {
+  display: block;
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-xs);
+  color: var(--corteza);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+}
+
+.lang-links a:hover {
+  background: rgb(97 72 58 / 0.07);
+}
+
+.lang-links a[aria-current] {
+  font-weight: 700;
+}
+
+/* En el menú de celulares, los idiomas van en línea */
+.lang-links--menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.lang-links--menu a {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--radius-pill);
+}
+
+.site-footer .lang-links--footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.75rem;
+}
+
+.site-footer .lang-links--footer a {
+  padding: 0;
+  color: var(--papel);
+}
+
+.site-footer .lang-links--footer a:hover {
+  background: none;
+  text-decoration: underline;
+}
+
+.site-footer__title--spaced {
+  margin-top: var(--space-lg);
+}
+
+/* Sobre la foto de la portada, el selector va en claro */
+.js .site-header--overlay:not(.is-scrolled):not(.is-open) .lang > summary {
+  color: var(--papel);
+}
+
+@media (max-width: 74.99rem) {
+  /* En celulares los idiomas están dentro del menú */
+  .site-header .lang {
+    display: none;
+  }
+}
+
 /* ---------- Pie de página ---------- */
 
 .site-footer {

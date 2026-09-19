@@ -14,6 +14,7 @@ export default {
     contact: 'Contacto',
     booking: 'Reservar',
     label: 'Navegación principal',
+    language: 'Idioma',
     open: 'Abrir menú',
     close: 'Cerrar menú',
     breadcrumb: 'Estás en',

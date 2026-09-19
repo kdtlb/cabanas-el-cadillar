@@ -40,7 +40,7 @@ export default {
   business: {
     title: 'Salón para reuniones empresariales en Tarija | El Cadillar',
     description:
-      'Salón exclusivo para reuniones de empresa en Tarija, a 7 km del centro: hospedaje para tu equipo, aperitivos y comidas en el mismo lugar. Cotiza por WhatsApp.',
+      'Salón de 90 m² para hasta 45 personas en Tarija, a 7 km del centro: reuniones de empresa con hospedaje para tu equipo, aperitivos y comidas. Cotiza por WhatsApp.',
   },
   contact: {
     title: 'Contacto y reservas por WhatsApp | El Cadillar Apart Hotel',

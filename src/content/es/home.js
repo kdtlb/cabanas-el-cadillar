@@ -9,8 +9,8 @@
 export default {
   hero: {
     eyebrow: 'El Cadillar Apart Hotel · Tarija, Bolivia',
-    title: 'Tu casa lejos de casa',
-    titleAccent: 'al pie de los cerros de Tarija',
+    title: 'Tu lugar para quedarte, descansar y disfrutar.',
+    titleAccent: 'Diez cabañas con piscina y quincho, a 7 km de Tarija',
     facts: [
       { icon: 'house', text: '10 cabañas de todo tamaño' },
       { icon: 'pool', text: 'Piscina y quincho' },
@@ -51,7 +51,7 @@ export default {
     eyebrow: 'Empresas',
     title: 'Tu próxima reunión de trabajo, en El Cadillar',
     lead: 'Un salón de uso exclusivo para empresas, lejos del ruido y a 7 km de la ciudad, con hospedaje para tu equipo, aperitivos y comidas en el mismo lugar.',
-    points: ['Salón solo para reuniones de trabajo', 'Hospedaje en 10 cabañas', 'Aperitivos y comidas', 'A 10 km del aeropuerto'],
+    points: ['Salón de 90 m² para 45 personas', 'Uso exclusivo para empresas', 'Hospedaje en 10 cabañas', 'Aperitivos y comidas'],
     link: 'Conocer el salón',
     quote: 'Cotizar por WhatsApp',
   },

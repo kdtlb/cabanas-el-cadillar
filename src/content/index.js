@@ -7,8 +7,11 @@
  * - `pick(campo, locale)`: elige el idioma en campos de datos del tipo { es: '…' }.
  */
 import es from './es.js';
+import en from './en.js';
+import fr from './fr.js';
+import pt from './pt.js';
 
-const catalogs = { es };
+const catalogs = { es, en, fr, pt };
 
 export const getContent = (locale) => catalogs[locale] ?? catalogs.es;
 

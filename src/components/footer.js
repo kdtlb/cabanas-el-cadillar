@@ -5,8 +5,9 @@
 import { mainNav } from '../config/routes.js';
 import { html } from '../lib/html.js';
 import { icon } from './icons.js';
+import { languageLinks } from './language.js';
 
-export function siteFooter(ctx) {
+export function siteFooter(ctx, page) {
   const { t, site, pick } = ctx;
   const { contact, location } = site;
 
@@ -38,6 +39,8 @@ export function siteFooter(ctx) {
       <ul class="site-footer__social">
         ${site.social.map((network) => html`<li><a href="${network.url}" target="_blank" rel="noopener">${icon(network.id, { size: 20 })}<span>${network.label}</span></a></li>`)}
       </ul>
+      <h2 class="site-footer__title site-footer__title--spaced">${t('nav.language')}</h2>
+      ${languageLinks(ctx, page, 'lang-links--footer')}
     </div>
   </div>
   <div class="site-footer__bottom">

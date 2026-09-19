@@ -47,6 +47,7 @@ export function homePage(ctx) {
 
   const hero = html`<section class="hero" aria-labelledby="hero-titulo">
   <div class="hero__media">${picture(ctx, HERO_PHOTO, { priority: true, sizes: HERO_SIZES, skipMedia: HERO_NO_PHOTO_MEDIA })}</div>
+  <div class="hero__backdrop" aria-hidden="true"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMax slice" focusable="false"><path class="hero__hill hero__hill--back" d="M0 200V88c44-28 74 10 120-6s70-50 114-42 82 56 166 38v122Z"/><path class="hero__hill hero__hill--front" d="M0 200v-52c50-24 88 18 134 6s74-38 116-28 84 42 150 28v46Z"/></svg></div>
   <div class="hero__inner">
     <div class="hero__content">
       <p class="hero__eyebrow"><span>${c.hero.eyebrow}</span></p>

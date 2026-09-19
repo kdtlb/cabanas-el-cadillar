@@ -51,6 +51,15 @@ async function listFiles(dir) {
   return files;
 }
 
+// Borra las carpetas que quedaron vacías (por ejemplo, al cambiar una dirección)
+async function removeEmptyDirs(dir) {
+  const entries = await readdir(dir, { withFileTypes: true }).catch(() => []);
+  for (const entry of entries) {
+    if (entry.isDirectory()) await removeEmptyDirs(path.join(dir, entry.name));
+  }
+  if (dir !== DIST && !(await readdir(dir)).length) await rm(dir, { recursive: true });
+}
+
 async function emit(relative, content) {
   const target = path.join(DIST, relative);
   await mkdir(path.dirname(target), { recursive: true });
@@ -218,6 +227,7 @@ async function main() {
       removed += 1;
     }
   }
+  await removeEmptyDirs(DIST);
 
   console.log(
     [

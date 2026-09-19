@@ -104,7 +104,7 @@ export default {
     whyLead: 'Un espacio para trabajar concentrados y descansar bien, a pocos minutos de la ciudad.',
     specsEyebrow: 'Ficha del salón',
     specsTitle: 'El salón en detalle',
-    specsLead: 'Escríbenos con la fecha y la cantidad de personas, y te confirmamos la disponibilidad y el armado que mejor se adapta a tu reunión.',
+    specsLead: 'Escríbenos con la fecha y la cantidad de personas, y te confirmamos la disponibilidad y cómo preparamos el salón para tu reunión.',
     servicesEyebrow: 'Servicios',
     servicesTitle: 'Todo para tu jornada, en un solo lugar',
     servicesLead: 'Suma al salón el hospedaje, los aperitivos y las comidas, y organiza la reunión completa con un solo contacto.',

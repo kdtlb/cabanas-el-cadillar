@@ -2,6 +2,7 @@
  * Todas las páginas del sitio. Cada módulo devuelve uno o más objetos de
  * página: { path, nav, title, description, image, body, jsonLd, ... }.
  */
+import { site } from '../config/site.js';
 import { bookingPage } from './booking.js';
 import { businessPage } from './business.js';
 import { cabinPages, cabinsPage } from './cabins.js';
@@ -25,6 +26,7 @@ export function buildPages(ctx) {
     locationPage(ctx),
     contactPage(ctx),
     bookingPage(ctx),
-    notFoundPage(ctx),
+    // El hosting sirve un solo 404 desde la raíz: se genera en el idioma principal
+    ...(ctx.locale === site.defaultLocale ? [notFoundPage(ctx)] : []),
   ];
 }
